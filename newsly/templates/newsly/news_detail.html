@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load i18n markup thumbnail file_tags youtube_tags frontadmin_tags %}
+
+{% block app.head %}{% endblock %}
+
+{% block content %}
+{% get_current_language as lang %}
+<div id="news-detail" class="grid_13 alpha push_1">
+    <ul class="breadcrumbs clearfix">
+        <li><a href="{% url website-home %}">{% trans "Home" %}</a></li>
+        <li><a href="{% url website-news %}">{% trans "News" %}</a></li>
+        <li><span>{{ object|truncatewords:"8" }}</span></li>
+    </ul>
+
+    {% frontadmin request object %}
+    <h1>{{ object }}</h1>
+    {% include "addthis.inc.html" %}
+    <span class="date-added">
+        {% blocktrans with time_since=news.date_added|date author=news.author %}By <strong>{{ author }}</strong> &ndash; {{ time_since }}{% endblocktrans %}
+    </span>
+    <div id="news-detail">
+        {{ object.text|markdown }}
+    </div>
+    {% endfrontadmin %}
+</div>
+
+<div id="news-archives" class="grid_8 omaga push_2">
+    <h1>{% trans "Details" %}</h1>
+
+    {# Meta #}
+    <dl id="news-meta" class="clearfix">
+        <dt>{% trans "Author" %}</dt>
+        <dd>{{ object.author }}</dd>
+        <dt class="noborder">{% trans "Date added" %}</dt>
+        <dd class="noborder">{{ object.date_added }}</dd>
+    </dl>
+
+    {# Documents #}
+    {% if object.newsdocument_set.all %}
+    <h1>{% trans "Attachments" %}</h1>
+    <ul id="news-document-list" class="document-list">
+        {% for document in object.newsdocument_set.all %}
+        {% if lang == 'fr' %}
+        <li><a href="{{ document.document_fr.url }}" class="file {{ document.document_fr.path|get_file_extension }}">{{ document }}</a></li>
+        {% else %}
+        <li><a href="{{ document.document_en.url }}" class="file {{ document.document_en.path|get_file_extension }}">{{ document }}</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {# Photos #}
+    {% if object.newsphoto_set.all %}
+    <h1>{% trans "Photos" %}</h1>
+    <a href="{{ object.newsphoto_set.all.0.photo.url }}" class="news-photo-thumb colorbox-link" title="{{ object.newsphoto_set.all.0.title }}" rel="gallery">
+        <img src="{% thumbnail object.newsphoto_set.all.0.photo 302x302 crop %}" alt="{{ object.newsphoto_set.all.0.title }}">
+    </a>
+    {% for photo in object.newsphoto_set.all|slice:"1:" %}
+    <a href="{{ photo.photo.url }}" class="news-photo-thumb colorbox-link" title="{{ photo.title }}" rel="gallery"><img src="{% thumbnail photo.photo 69x69 crop %}" alt="{{ photo.title }}"></a>
+    {% endfor %}
+    <hr class="clear">
+    {% endif %}
+
+    {# Videos #}
+    {% if object.newsvideo_set.all %}
+    <h1>{% trans "Videos" %}</h1>
+    {% for video in object.newsvideo_set.all %}
+    {% embed_player video.video 310 %}
+    {% if not forloop.last %}<br><br>{% endif %}
+    {% endfor %}
+    <hr class="clear">
+    {% endif %}
+
+    {# Next/prev #}
+    {% if object.get_next_by_date_added %}
+    <h1>
+        <a href="{{ object.get_next_by_date_added.get_absolute_url }}">&raquo; {% trans "Next" %}</a>
+        <small>{{ object.get_next_by_date_added }}</small>
+    </h1>
+    {% endif %}
+    {% if object.get_previous_by_date_added %}
+    <h1>
+        <a href="{{ object.get_previous_by_date_added.get_absolute_url }}">&laquo; {% trans "Previous" %}</a>
+        <small>{{ object.get_previous_by_date_added }}</small>
+    </h1>
+    {% endif %}
+</div>
+{% endblock %}
+
