@@ -1,0 +1,2 @@
+git+git://github.com/jpwatts/django-positions.git#egg=django-positions
+git+git://github.com/SmileyChris/easy-thumbnails.git#egg=easy_thumbnails
