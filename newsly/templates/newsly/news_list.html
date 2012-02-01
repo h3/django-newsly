@@ -6,7 +6,7 @@
 {% block head.title %}{% trans "News" %}{% endblock %}
 {% block page.title %}{% trans "News" %}{% endblock %}
 
-{% block page.id %}newsly-list{% endblock %}
+{% block page.id %}newsly-detail{% endblock %}
 {% block page.class %}{% endblock %}
 
 {% block page.last_updated %}{% blocktrans with date_added=object_list.0.date_added %}Last updated: {{ date_added }}{% endblocktrans %}{% endblock %}
@@ -17,7 +17,7 @@
 {% endblock %}
 
 {% block page.content %}
-{% for news in object_list %}{{ news}}
+{% for news in object_list %}
 {% include "newsly/news_teaser.inc.html" %}
 {% endfor %}
 {% endblock %}

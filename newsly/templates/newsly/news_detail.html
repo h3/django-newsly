@@ -1,8 +1,9 @@
 {% extends "newsly/base.html" %}
 {% load i18n %}
 
-{# block meta.description %}{% trans "Recent news" %}{% endblock #}
-{# block meta.keywords %}{% endblock #}
+{% block meta.description %}{{ object.description }}{% endblock %}
+{% block meta.keywords %}{{ object.keywords }}{% endblock %}
+
 {% block head.title %}{{ object }} / {% trans "News" %} / {% endblock %}
 {% block page.title %}{{ object }}{% endblock %}
 
