@@ -1,0 +1,12 @@
+<div class="newsly-object">
+    <h2><a href="{{ news.get_absolute_url }}">{{ news }}</a></h2>
+    {% comment %}
+    {% if news.newsphoto_set.all %}
+    <a href="{{ news.newsphoto_set.all.0.photo.url }}" class="news-photo-thumb colorbox-link" style="float: left;margin-right: 20px;margin-top:10px;" title="{{ photo.title }}" rel="gallery"><img src="{% thumbnail news.newsphoto_set.all.0.photo 150x150 crop %}" alt="{{ photo.title }}"></a>
+    {% endif %}
+    {% endcomment %}
+    <div class="news-teaser">
+        {{ news.teaser|safe }}
+    </div>
+</div>
+

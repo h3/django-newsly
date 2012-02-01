@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import *
+from newsly.views import *
 
 urlpatterns=patterns('',
     url(r'^page/(?P<page>[0-9]+)/$', NewsView.as_view(), name="newsly-index"),

@@ -1,0 +1,15 @@
+{% load i18n %}
+<div id="newsly-authors">
+    <h1>{% trans "Authors" %}</h1>
+    <ul>
+        {% for news in author_list %}
+        <li>
+            {% if request.GET.a == news.author %}
+            <span>{{ news.author }}</span>
+            {% else %}
+            <a href="?a={{ news.author }}">{{ news.author }}</a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>

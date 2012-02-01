@@ -1,72 +1,28 @@
-{% extends "base.html" %}
-{% load i18n markup seoutils_tags thumbnail frontadmin_tags %}
+{% extends "newsly/base.html" %}
+{% load i18n %}
 
+{# block meta.description %}{% trans "Recent news" %}{% endblock #}
+{# block meta.keywords %}{% endblock #}
+{% block head.title %}{% trans "News" %}{% endblock %}
+{% block page.title %}{% trans "News" %}{% endblock %}
 
-{% block app.title %}{% seometa_for_url '/nouvelles/' title %} / {% endblock %}
-{% block project.description %}{% seometa_for_url '/nouvelles/' desc %}{% endblock %}
-{% block project.keywords %}{% seometa_for_url '/nouvelles/' keywords %}{% endblock %}
+{% block page.id %}newsly-list{% endblock %}
+{% block page.class %}{% endblock %}
 
-{% block app.head %}{% endblock %}
+{% block page.last_updated %}{% blocktrans with date_added=object_list.0.date_added %}Last updated: {{ date_added }}{% endblocktrans %}{% endblock %}
 
-{% block content %}
-<hr class="space">
-<div id="news-list" class="grid_17 alpha push_1">
-    <span class="news-last-updated">
-        {% blocktrans with date_added=object_list.0.date_added %}Last updated: {{ date_added }}{% endblocktrans %}
-    </span>
-    <h1>{% trans "News" %}</h1>
-    <ul class="breadcrumbs clearfix">
-        <li><a href="{% url website-home %}">{% trans "Home" %}</a></li>
-        <li><span>{% trans "News" %}</span></li>
-    </ul>
-    {% frontadmin request "news.news" %}
-    {% for news in object_list %}
-    <div class="news-item clearfix">
-        <h2><a href="{{ news.get_absolute_url }}">{{ news }}</a></h2>
-        {% if news.newsphoto_set.all %}
-        <a href="{{ news.newsphoto_set.all.0.photo.url }}" class="news-photo-thumb colorbox-link" style="float: left;margin-right: 20px;margin-top:10px;" title="{{ photo.title }}" rel="gallery"><img src="{% thumbnail news.newsphoto_set.all.0.photo 150x150 crop %}" alt="{{ photo.title }}"></a>
-        {% endif %}
-        <div class="news-teaser">
-            {{ news.text|truncatewords_html:"30"|safe }}
-        </div>
-    </div>
-    {% endfor %}
-    {% endfrontadmin %}
-    <div id="pagination">
-        {% include "pagination.html" %}
-    </div>
-</div>
-<div id="news-archives" class="omega grid_4 push_2">
-    <h1>{% trans "Archives" %}</h1>
-    <ul>
-        {% for news in date_list %}
-        {% ifchanged news.date_added.month %}
-        <li>
-            {% ifchanged news.date_added|date:"Y" %}
-            <h3>{{ news.date_added.year }}</h3>
-            {% endifchanged %}
-            {% if request.GET.y == news.date_added.year|slugify and request.GET.m == news.date_added.month|slugify %}
-            <span>{{ news.date_added|date:"F"}}</span>
-            {% else %}
-            <a href="?y={{ news.date_added.year }}&m={{ news.date_added.month }}">{{ news.date_added|date:"F"}}</a>
-            {% endif %}
-        </li>
-        {% endifchanged %}
-        {% endfor %}
-    </ul>
-
-    <h1>{% trans "Authors" %}</h1>
-    <ul>
-        {% for news in author_list %}
-        <li>
-            {% if request.GET.a == news.author %}
-            <span>{{ news.author }}</span>
-            {% else %}
-            <a href="?a={{ news.author }}">{{ news.author }}</a>
-            {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
-</div>
+{% block page.breadcrumbs %}
+<div><a href="{% url website-home %}">{% trans "Home" %}</a></div>
+<div><span>{% trans "News" %}</span></div>
 {% endblock %}
 
+{% block page.content %}
+{% for news in object_list %}{{ news}}
+{% include "newsly/news_teaser.inc.html" %}
+{% endfor %}
+{% endblock %}
+
+{% block page.sidebar %}
+{% include "newsly/sidebar_archives.inc.html" %}
+{% include "newsly/sidebar_authors.inc.html" %}
+{% endblock %}

@@ -8,7 +8,7 @@ from django.db.models.signals import post_delete
 from positions.fields import PositionField
 from positions.managers import PositionManager
 
-from newsly.utils.storage import file_cleanup
+from newsly.utils import file_cleanup
 from newsly.conf import settings
 
 
@@ -26,19 +26,30 @@ def get_news_document_path(instance, filename):
             'filename': filename}
 
 
+class NewsCategory(models.Model):
+    title = models.CharField(_("Title"), max_length=250)
+    slug  = models.CharField(_("Slug"), max_length=250)
+
+
 class News(models.Model):
     title = models.CharField(_("Title"), max_length=250)
     slug  = models.CharField(_("Slug"), max_length=250)
+    author = models.ForeignKey(User)
+
     teaser = models.TextField(_("Text"))
     body  = models.TextField(_("Text"))
-    author = models.CharField(_("Author"), max_length=250)
-    news  = models.ForeignKey(User)
-    date_added = models.DateTimeField(auto_now_add=True)
-    date_publish = models.DateTimeField(blank=True, null=True)
+
+    date_added     = models.DateTimeField(auto_now_add=True)
+    date_updated   = models.DateTimeField(auto_now=True)
+    date_publish   = models.DateTimeField(blank=True, null=True)
     date_unpublish = models.DateTimeField(blank=True, null=True)
 
+    category = models.ForeignKey(NewsCategory, blank=True, null=True)
+    meta_description = models.CharField(_("Meta description"), max_length=165, blank=True, null=True)
+    meta_keywords = models.CharField(_("Meta keywords"), max_length=250, blank=True, null=True)
+
     def get_absolute_url(self):
-        return reverse('news-detail', args=[self.slug])
+        return reverse('newsly-detail', args=[self.slug])
     
     def __unicode__(self):
         return u'%s' % self.title
