@@ -1,0 +1,8 @@
+{% load i18n %}
+{# Meta #}
+<dl id="news-meta" class="clearfix">
+    <dt>{% trans "Author" %}</dt>
+    <dd>{{ object.author }}</dd>
+    <dt class="noborder">{% trans "Date added" %}</dt>
+    <dd class="noborder">{{ object.date_added }}</dd>
+</dl>

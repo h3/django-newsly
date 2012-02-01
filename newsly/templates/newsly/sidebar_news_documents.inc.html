@@ -1,0 +1,11 @@
+{% load i18n %}
+{# Documents #}
+{% if object.newsdocument_set.all %}
+<h1>{% trans "Attachments" %}</h1>
+<ul id="news-document-list" class="document-list">
+    {% for document in object.newsdocument_set.all %}
+    <li><a href="{{ document.document_en.url }}" class="file {# document.document_en.path|get_file_extension #}">{{ document }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+

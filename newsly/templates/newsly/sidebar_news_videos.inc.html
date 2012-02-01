@@ -1,0 +1,11 @@
+{% load i18n %}
+{# Videos #}
+{% if object.newsvideo_set.all %}
+<h1>{% trans "Videos" %}</h1>
+{% for video in object.newsvideo_set.all %}
+{# embed_player video.video 310 #}
+{% if not forloop.last %}<br><br>{% endif %}
+{% endfor %}
+<hr class="clear">
+{% endif %}
+
