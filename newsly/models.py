@@ -50,6 +50,16 @@ class News(models.Model):
 
     def get_absolute_url(self):
         return reverse('newsly-detail', args=[self.slug])
+
+    def get_author_display(self):
+        if settings.AUTHOR_DISPLAY:
+            if settings.AUTHOR_DISPLAY == 'username':
+                return self.author.username
+            elif settings.AUTHOR_DISPLAY == 'fullname':
+                a = "%s %s".strip() % (self.author.first_name, self.author.last_name)
+                if a.strip() != '': return a.strip()
+        return False
+        
     
     def __unicode__(self):
         return u'%s' % self.title

@@ -1,0 +1,10 @@
+{% load i18n %}
+{# Meta #}
+<dl class="news-meta">
+    {% if object.get_author_display %}
+    <dt>{% trans "Author" %}</dt>
+    <dd>{{ object.get_author_display }}</dd>
+    {% endif %}
+    <dt class="noborder">{% trans "Date" %}</dt>
+    <dd class="noborder">{{ object.date_added }}</dd>
+</dl>

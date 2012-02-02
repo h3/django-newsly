@@ -7,7 +7,7 @@
 {% block head.title %}{{ object }} / {% trans "News" %} / {% endblock %}
 {% block page.title %}{{ object }}{% endblock %}
 
-{% block page.id %}newsly-list{% endblock %}
+{% block page.id %}newsly-detail{% endblock %}
 {% block page.class %}{% endblock %}
 
 {% block page.last_updated %}{% blocktrans with date_added=object.date_updated %}Last updated: {{ date_added }}{% endblocktrans %}{% endblock %}
@@ -23,7 +23,7 @@
 {% endblock %}
 
 {% block page.sidebar %}
-{% include "newsly/sidebar_news_meta.inc.html" %}
+{% include "newsly/news_meta.inc.html" %}
 {% include "newsly/sidebar_news_photos.inc.html" %}
 {% include "newsly/sidebar_news_videos.inc.html" %}
 {% include "newsly/sidebar_news_documents.inc.html" %}
