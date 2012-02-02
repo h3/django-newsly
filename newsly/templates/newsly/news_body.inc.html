@@ -1,8 +1,5 @@
-{% load i18n markup %}
-<span class="date-added">
-    {% blocktrans with time_since=news.date_added|date author=news.author %}By <strong>{{ author }}</strong> &ndash; {{ time_since }}{% endblocktrans %}
-</span>
-<div id="news-detail">
-    {{ object.body|markdown }}
+{% load i18n %}
+<div class="news-body">
+    {{ object.body|linebreaks|safe }}
 </div>
 

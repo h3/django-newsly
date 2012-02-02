@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
@@ -8,22 +10,15 @@ from django.db.models.signals import post_delete
 from positions.fields import PositionField
 from positions.managers import PositionManager
 
-from newsly.utils import file_cleanup
+from newsly.utils import file_cleanup, get_news_photo_path, get_news_document_path
 from newsly.conf import settings
 
 
-def get_news_photo_path(instance, filename):
-    return settings.PHOTOS_PATH % {
-            'slug': instance.news.slug, 
-            'username': instance.news.author.username, 
-            'filename': filename}
-
-
-def get_news_document_path(instance, filename):
-    return settings.DOCUMENTS_PATH % {
-            'slug': instance.news.slug, 
-            'username': instance.news.author.username, 
-            'filename': filename}
+class PublishedNewsManager(models.Manager):
+    def get_query_set(self):
+        now = datetime.datetime.now()
+        return super(PublishedNewsManager, self).get_query_set()\
+                    .exclude(date_unpublish__lte=now).exclude(date_publish__gte=now)
 
 
 class NewsCategory(models.Model):
@@ -48,6 +43,10 @@ class News(models.Model):
     meta_description = models.CharField(_("Meta description"), max_length=165, blank=True, null=True)
     meta_keywords = models.CharField(_("Meta keywords"), max_length=250, blank=True, null=True)
 
+    objects   = models.Manager()
+    published = PublishedNewsManager()
+    
+    @models.permalink
     def get_absolute_url(self):
         return reverse('newsly-detail', args=[self.slug])
 
@@ -57,7 +56,10 @@ class News(models.Model):
                 return self.author.username
             elif settings.AUTHOR_DISPLAY == 'fullname':
                 a = "%s %s".strip() % (self.author.first_name, self.author.last_name)
-                if a.strip() != '': return a.strip()
+                if a.strip() != '': 
+                    return a.strip()
+                else:
+                    return self.author.username
         return False
         
     

@@ -3,6 +3,22 @@ import os, unicodedata
 from django.core.files.storage import FileSystemStorage
 from django.db.models.fields.files import FileField
 
+from newsly.conf import settings
+
+
+def get_news_photo_path(instance, filename):
+    return settings.PHOTOS_PATH % {
+            'slug': instance.news.slug, 
+            'username': instance.news.author.username, 
+            'filename': filename}
+
+
+def get_news_document_path(instance, filename):
+    return settings.DOCUMENTS_PATH % {
+            'slug': instance.news.slug, 
+            'username': instance.news.author.username, 
+            'filename': filename}
+
 
 def file_cleanup(sender, **kwargs):
     """
