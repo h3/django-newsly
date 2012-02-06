@@ -1,14 +1,18 @@
 {% load i18n %}
 {# Next/prev #}
-{% if object.get_next_by_date_added %}
-<h1>
-    <a href="{{ object.get_next_by_date_added.get_absolute_url }}">&raquo; {% trans "Next" %}</a>
-    <small>{{ object.get_next_by_date_added }}</small>
-</h1>
-{% endif %}
-{% if object.get_previous_by_date_added %}
-<h1>
-    <a href="{{ object.get_previous_by_date_added.get_absolute_url }}">&laquo; {% trans "Previous" %}</a>
-    <small>{{ object.get_previous_by_date_added }}</small>
-</h1>
+{% if object.get_next_by_date_added or object.get_previous_by_date_added %}
+<div class="news-nextprev">
+    {% if object.get_next_by_date_added %}
+    <div class="news-next">
+        <a href="{{ object.get_next_by_date_added.get_absolute_url }}">&raquo; {% trans "Next" %}</a>
+        <small>{{ object.get_next_by_date_added }}</small>
+    </div>
+    {% endif %}
+    {% if object.get_previous_by_date_added %}
+    <div class="news-prev">
+        <a href="{{ object.get_previous_by_date_added.get_absolute_url }}">&laquo; {% trans "Previous" %}</a>
+        <small>{{ object.get_previous_by_date_added }}</small>
+    </div>
+    {% endif %}
+</div>
 {% endif %}

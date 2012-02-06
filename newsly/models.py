@@ -46,7 +46,6 @@ class News(models.Model):
     objects   = models.Manager()
     published = PublishedNewsManager()
     
-    @models.permalink
     def get_absolute_url(self):
         return reverse('newsly-detail', args=[self.slug])
 
