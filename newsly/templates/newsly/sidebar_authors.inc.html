@@ -1,13 +1,26 @@
 {% load i18n %}
-<div id="newsly-authors">
-    <h1>{% trans "Authors" %}</h1>
+<div class="news-authors">
+    <h2>{% trans "Authors" %}</h2>
     <ul>
         {% for news in author_list %}
         <li>
-            {% if request.GET.a == news.author %}
-            <span>{{ news.author }}</span>
+            {# The slugify filter is a dirty hack to ensure we are comparing a string with a string #}
+            {% if request.GET.a == news.author|slugify %}
+            <span>
+                {% if news.author__first_name %}
+                {{ news.author__first_name }} {{ news.author__last_name }}
+                {% else %}
+                {{ news.author__username }}
+                {% endif %}
+            </span>
             {% else %}
-            <a href="?a={{ news.author }}">{{ news.author }}</a>
+            <a href="?a={{ news.author }}">
+                {% if news.author__first_name %}
+                {{ news.author__first_name }} {{ news.author__last_name }}
+                {% else %}
+                {{ news.author__username }}
+                {% endif %}
+            </a>
             {% endif %}
         </li>
         {% endfor %}

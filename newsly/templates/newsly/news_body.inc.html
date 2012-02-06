@@ -1,5 +1,7 @@
 {% load i18n %}
+<div class="news-teaser">
+    {{ object.teaser|linebreaks|safe }}
+</div>
 <div class="news-body">
     {{ object.body|linebreaks|safe }}
 </div>
-

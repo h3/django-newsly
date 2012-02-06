@@ -32,11 +32,11 @@ class NewsDocumentInline(StackedInlineAdmin):
 
 
 class NewsAdmin(ModelAdmin):
-    list_display = ('title', 'date_added')
+    list_display = ('title', 'author', 'date_added', 'date_publish', 'date_unpublish')
     list_filter = ('author',)
     search_fields = ('title',)
     prepopulated_fields = {'slug': ('title',)}
-    date_hierarchy = 'date_added'
+    date_hierarchy = 'date_publish'
     inlines = [NewsPhotoInline, NewsVideoInline, NewsDocumentInline]
     class Media:
         js = [

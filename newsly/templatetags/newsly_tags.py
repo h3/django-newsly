@@ -1,3 +1,4 @@
+import os
 import datetime
 
 from django.core.urlresolvers import reverse
@@ -53,3 +54,18 @@ def embed_player(v, w):
         return html % {'w': w, 'src': v, 'h': int(int(w) * 0.75) }
     except:
         return ''
+
+@register.filter()
+def get_file_extension(f):
+    """
+    Returns a file extension for a given path or filename
+
+    >>> get_file_extension("test.pdf")
+    pdf
+    
+    >>> get_file_extension("/tmp/test.pdf")
+    pdf
+
+    """
+    basename, ext = os.path.splitext(str(f))
+    return ext.replace('.', '').lower()

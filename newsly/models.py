@@ -45,7 +45,12 @@ class News(models.Model):
 
     objects   = models.Manager()
     published = PublishedNewsManager()
-    
+
+    def save(self, *args, **kwargs):
+        if self.date_publish is None:
+            self.date_publish = datetime.datetime.now()
+        super(News, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse('newsly-detail', args=[self.slug])
 
@@ -66,7 +71,7 @@ class News(models.Model):
         return u'%s' % self.title
 
     class Meta:
-        ordering = ('-date_added', )
+        ordering = ('-date_publish', )
         verbose_name = _('News')
         verbose_name_plural = _('News')
 
