@@ -1,3 +1,4 @@
+from modeltranslation.translator import translator, TranslationOptions
 from newsly.models import News, NewsPhoto, NewsVideo, NewsDocument
 
 class NewsTranslationOptions(TranslationOptions):
