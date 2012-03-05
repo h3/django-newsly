@@ -7,6 +7,13 @@ from django.utils.translation import ugettext_lazy as _
 from newsly.models import *
 from newsly.conf import settings
 
+if settings.GRPAPPELLI_TINYMCE:
+    NEWSLY_JS = [
+        '%s%s' % (settings.STATIC_URL, settings.GRPAPPELLI_TINYMCE_SRC),
+        '%s%s' % (settings.STATIC_URL, settings.GRPAPPELLI_TINYMCE_CONF)]
+else:
+    NEWSLY_JS = []
+
 try:
     from grappellifit.admin import TranslationAdmin, TranslationStackedInline
     ModelAdmin = TranslationAdmin
@@ -39,8 +46,7 @@ class NewsAdmin(ModelAdmin):
     date_hierarchy = 'date_publish'
     inlines = [NewsPhotoInline, NewsVideoInline, NewsDocumentInline]
     class Media:
-        js = [
-            '%sgrappelli/tinymce/jscripts/tiny_mce/tiny_mce.js' % settings.STATIC_URL,
-            '%swebsite/js/tinymce_setup.js' % settings.STATIC_URL,
-        ]
+        # FIXME: This might clash with TranslationAdmin.Media.js ..
+        js = NEWSLY_JS
+
 admin.site.register(News, NewsAdmin)
