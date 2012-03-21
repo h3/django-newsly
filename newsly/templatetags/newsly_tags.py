@@ -15,11 +15,14 @@ class LatestNewsNode(template.Node):
         self.limit = limit
     
     def render(self, context):
-        rs = News.published.all()[0:self.limit]
-        if self.limit == 1:
-            context[self.varname] = rs[0]
-        else:
-            context[self.varname] = rs[0:self.limit]
+        try:
+            rs = News.published.all()[0:self.limit]
+            if self.limit == 1:
+                context[self.varname] = rs[0]
+            else:
+                context[self.varname] = rs[0:self.limit]
+        except:
+            pass
         return ''
 
 @register.tag(name="get_latest_news")
