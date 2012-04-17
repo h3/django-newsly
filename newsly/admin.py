@@ -26,40 +26,16 @@ except:
 class NewsVideoInline(StackedInlineAdmin):
     model = NewsVideo
     extra = 1
-    fieldsets = (
-        (None, {
-            'fields': (
-                'title', 'video',
-                ('position', 'is_visible',)
-            )
-        }),
-    )
 
 
 class NewsPhotoInline(StackedInlineAdmin):
     model = NewsPhoto
     extra = 1
-    fieldsets = (
-        (None, {
-            'fields': (
-                'title', 'photo',
-                ('position', 'is_visible',)
-            )
-        }),
-    )
 
 
 class NewsDocumentInline(StackedInlineAdmin):
     model = NewsDocument
     extra = 1
-    fieldsets = (
-        (None, {
-            'fields': (
-                'title', 'document',
-                ('position', 'is_visible',)
-            )
-        }),
-    )
 
 
 class NewsAdmin(ModelAdmin):
