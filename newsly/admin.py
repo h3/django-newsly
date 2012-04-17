@@ -26,16 +26,40 @@ except:
 class NewsVideoInline(StackedInlineAdmin):
     model = NewsVideo
     extra = 1
+    fieldsets = (
+        (None, {
+            'fields': (
+                'title', 'video',
+                ('position', 'is_visible',)
+            )
+        }),
+    )
 
 
 class NewsPhotoInline(StackedInlineAdmin):
     model = NewsPhoto
     extra = 1
+    fieldsets = (
+        (None, {
+            'fields': (
+                'title', 'photo',
+                ('position', 'is_visible',)
+            )
+        }),
+    )
 
 
 class NewsDocumentInline(StackedInlineAdmin):
     model = NewsDocument
     extra = 1
+    fieldsets = (
+        (None, {
+            'fields': (
+                'title', 'document',
+                ('position', 'is_visible',)
+            )
+        }),
+    )
 
 
 class NewsAdmin(ModelAdmin):
@@ -45,6 +69,30 @@ class NewsAdmin(ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'date_publish'
     inlines = [NewsPhotoInline, NewsVideoInline, NewsDocumentInline]
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                'author', 
+                'category',
+                'date_publish', 
+                'date_unpublish',
+            )
+        }),
+        (_('Title'), {
+            'fields': ('title', 'slug',)
+        }),
+        (_('Teaser'), {
+            'fields': ('teaser',)
+        }),
+        (_('Content'), {
+            'fields': ('body',)
+        }),
+        (_('SEO'), {
+            'fields': ('meta_keywords', 'meta_description',)
+        }),
+    )
+
     class Media:
         # FIXME: This might clash with TranslationAdmin.Media.js ..
         js = NEWSLY_JS

@@ -19,4 +19,3 @@ translator.register(NewsVideo, NewsVideoTranslationOptions)
 class NewsDocumentTranslationOptions(TranslationOptions):
     fields = ('title', )
 translator.register(NewsDocument, NewsDocumentTranslationOptions)
-
