@@ -1,17 +1,17 @@
 {% load i18n %}
 <div id="news-archives">
-    <h1>{% trans "Archives" %}</h1>
+    <h2>{% trans "Archives" %}</h2>
     <ul>
         {% for news in date_list %}
-        {% ifchanged news.date_added.month %}
+        {% ifchanged news.date_publish.month %}
         <li>
-            {% ifchanged news.date_added|date:"Y" %}
-            <h3>{{ news.date_added.year }}</h3>
+            {% ifchanged news.date_publish|date:"Y" %}
+            <h3>{{ news.date_publish.year }}</h3>
             {% endifchanged %}
-            {% if request.GET.y == news.date_added.year|slugify and request.GET.m == news.date_added.month|slugify %}
-            <span>{{ news.date_added|date:"F"}}</span>
+            {% if request.GET.y == news.date_publish.year|slugify and request.GET.m == news.date_publish.month|slugify %}
+            <span>{{ news.date_publish|date:"F"}}</span>
             {% else %}
-            <a href="?y={{ news.date_added.year }}&m={{ news.date_added.month }}">{{ news.date_added|date:"F"}}</a>
+            <a href="?y={{ news.date_publish.year }}&m={{ news.date_publish.month }}">{{ news.date_publish|date:"F"}}</a>
             {% endif %}
         </li>
         {% endifchanged %}

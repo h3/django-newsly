@@ -1,19 +1,26 @@
-<html>
-    <head>
-        <title>{% block head.title %}{% endblock %}</title>
-        <meta name="description" content="{% block meta.description %}{% endblock %}">
-        <meta name="keywords" content="{% block meta.keywords %}{% endblock %}">
-    </head>
-    <body>
-        <div id="{% block page.id %}{% endblock %}" class="{% block page.class %}{% endblock %}">
-            <div class="breadcrumbs">{% block page.breadcrumbs %}{% endblock %}</div>
-            <h1>{% block page.title %}{% endblock %}</h1>
-            <span class="newsly-last-updated">{% block page.last_updated %}{% endblock %}</span>
-            <div id="newsly-content">{% block page.content %}{% endblock %}</div>
-            <div id="newsly-sidebar">{% block page.sidebar %}{% endblock %}</div>
-            {% if is_paginated %}
-            <div class="pagination">{% include "newsly/pagination.html" %}</div>
-            {% endif %}
+{% extends "base.html" %}
+{% load i18n thumbnail generic_flatblocks frontadmin_tags markup %}
+
+{% block app.title %}{% firstof object.title request.meta.title %} / {% trans "News" %} / {% endblock %}
+{% block meta.description %}{% firstof object.description request.meta.desc %}{% endblock %}
+{% block meta.keywords %}{% firstof object.keywords request.meta.keywords %}{% endblock %}
+
+{% block content %}
+<div id="newsly-page">
+    <div id="{% block page.id %}{% endblock %}" class="{% block page.class %}{% endblock %}">
+        <div class="breadcrumb">
+            {% block page.breadcrumbs %}{% endblock %}
         </div>
-    </body>
-</html>
+        <div id="newsly-content">
+            <h1>{% trans "News" %}</h1>
+            {% block page.content %}{% endblock %}
+        </div>
+        <div class="newsly-sidebar">
+            {% block page.sidebar %}{% endblock %}
+        </div>
+        {% if is_paginated %}
+        <div class="pagination">{% include "pagination.html" %}</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -3,6 +3,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, TemplateView, DetailView
 
 from newsly.models import *
+from newsly.conf import settings as newsly_settings
+
 
 class NewsView(ListView):
     template_name = 'newsly/news_list.html'
@@ -33,3 +35,10 @@ class NewsView(ListView):
 class NewsDetail(DetailView):
     template_name = 'newsly/news_detail.html'
     model = News    
+
+    def get_context_data(self, **kwargs):
+        context = super(NewsDetail, self).get_context_data(**kwargs)
+        context['video_size'] = newsly_settings.VIDEOS_SIZE
+        context['first_thumbnail_size'] = newsly_settings.FIRST_THUMBNAIL_SIZE
+        context['thumbnail_size'] = newsly_settings.THUMBNAIL_SIZE
+        return context

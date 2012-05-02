@@ -1,11 +1,5 @@
 {% extends "newsly/base.html" %}
-{% load i18n %}
-
-{% block meta.description %}{{ object.description }}{% endblock %}
-{% block meta.keywords %}{{ object.keywords }}{% endblock %}
-
-{% block head.title %}{{ object }} / {% trans "News" %} / {% endblock %}
-{% block page.title %}{{ object }}{% endblock %}
+{% load i18n frontadmin_tags %}
 
 {% block page.id %}newsly-detail{% endblock %}
 {% block page.class %}{% endblock %}
@@ -19,7 +13,10 @@
 {% endblock %}
 
 {% block page.content %}
+{% frontadmin request object %}
+<h2>{{ object.title }}</h2>
 {% include "newsly/news_body.inc.html" %}
+{% endfrontadmin %}
 {% endblock %}
 
 {% block page.sidebar %}
