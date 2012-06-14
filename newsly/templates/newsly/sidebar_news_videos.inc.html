@@ -4,12 +4,8 @@
 <div class="news-videos">
     <h2>{% trans "Videos" %}</h2>
     {% for video in object.newsvideo_set.all %}
-<<<<<<< HEAD
     {{ video.title }}
-    {% embed_player video.video 200 %}
-=======
     {% embed_player video.video video_size %}
->>>>>>> 3744520706572962ef13cb0de2c392f396aa5906
     {% endfor %}
 </div>
 {% endif %}
