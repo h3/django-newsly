@@ -1,10 +1,7 @@
 {% extends "newsly/base.html" %}
-{% load i18n %}
+{% load i18n frontadmin_tags %}
 
-{# block meta.description %}{% trans "Recent news" %}{% endblock #}
-{# block meta.keywords %}{% endblock #}
-{% block head.title %}{% trans "News" %}{% endblock %}
-{% block page.title %}{% trans "News" %}{% endblock %}
+{% block head.title %}{% if request.meta.title %}{{ request.meta.title }}{% else %}{% trans "News" %} / {% endif %}{% endblock %}
 
 {% block page.id %}newsly-list{% endblock %}
 {% block page.class %}{% endblock %}
@@ -17,9 +14,11 @@
 {% endblock %}
 
 {% block page.content %}
+{% frontadmin request "newsly.news" %}
 {% for news in object_list %}
 {% include "newsly/news_teaser.inc.html" %}
 {% endfor %}
+{% endfrontadmin %}
 {% endblock %}
 
 {% block page.sidebar %}

@@ -45,6 +45,30 @@ class NewsAdmin(ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'date_publish'
     inlines = [NewsPhotoInline, NewsVideoInline, NewsDocumentInline]
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                'author', 
+                'category',
+                'date_publish', 
+                'date_unpublish',
+            )
+        }),
+        (_('Title'), {
+            'fields': ('title', 'slug',)
+        }),
+        (_('Teaser'), {
+            'fields': ('teaser',)
+        }),
+        (_('Content'), {
+            'fields': ('body',)
+        }),
+        (_('SEO'), {
+            'fields': ('meta_keywords', 'meta_description',)
+        }),
+    )
+
     class Media:
         # FIXME: This might clash with TranslationAdmin.Media.js ..
         js = NEWSLY_JS

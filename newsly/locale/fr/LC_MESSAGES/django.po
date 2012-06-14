@@ -1,0 +1,139 @@
+# Translation file for django-newsly.
+# Copyright (C) 2012 Maxime Haineault
+# This file is distributed under the same license as the django-newsly package.
+# Maxime Haineault <max@motion-m.ca>, 2012.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-04-17 10:54-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Maxime Haineault <max@motion-m.ca>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+#: admin.py:82 models.py:25 models.py:30 models.py:80
+msgid "Title"
+msgstr "Titre"
+
+#: admin.py:85
+msgid "Teaser"
+msgstr "Apperçu"
+
+#: admin.py:88
+msgid "Content"
+msgstr "Contenu"
+
+#: admin.py:91
+msgid "SEO"
+msgstr "SEO"
+
+#: models.py:26 models.py:31
+msgid "Slug"
+msgstr "Slug"
+
+#: models.py:34 models.py:35
+msgid "Text"
+msgstr "Texte"
+
+#: models.py:43
+msgid "Meta description"
+msgstr "Description (méta)"
+
+#: models.py:44
+msgid "Meta keywords"
+msgstr "Mots-clés (méta)"
+
+#: models.py:75 models.py:76 templates/newsly/news_detail.html:7
+#: templates/newsly/news_detail.html:17 templates/newsly/news_list.html:6
+#: templates/newsly/news_list.html.py:7 templates/newsly/news_list.html:16
+msgid "News"
+msgstr "Nouvelles"
+
+#: models.py:81
+msgid "Is Visible"
+msgstr "Es visible"
+
+#: models.py:97 models.py:99
+msgid "Photo"
+msgstr "Photo"
+
+#: models.py:100 templates/newsly/sidebar_news_photos.inc.html:5
+msgid "Photos"
+msgstr "Photos"
+
+#: models.py:105
+msgid "URL"
+msgstr "URL"
+
+#: models.py:107
+msgid "Video"
+msgstr "Vidéo"
+
+#: models.py:108 templates/newsly/sidebar_news_videos.inc.html:5
+msgid "Videos"
+msgstr "Vidéos"
+
+#: models.py:112 models.py:118
+msgid "Document"
+msgstr "Document"
+
+#: models.py:119
+msgid "Documents"
+msgstr "Documents"
+
+#: templates/newsly/news_detail.html:13 templates/newsly/news_list.html:12
+#, python-format
+msgid "Last updated: %(date_added)s"
+msgstr "Dernière mise à jour: %(date_added)s"
+
+#: templates/newsly/news_detail.html:16 templates/newsly/news_list.html:15
+msgid "Home"
+msgstr "Accueil"
+
+#: templates/newsly/news_meta.inc.html:5
+msgid "Author"
+msgstr "Ateur"
+
+#: templates/newsly/news_meta.inc.html:8
+msgid "Date"
+msgstr "Date"
+
+#: templates/newsly/pagination.html:5
+msgid "Previous page"
+msgstr "Page précédente"
+
+#: templates/newsly/pagination.html:5
+msgid "Prev"
+msgstr "Préc."
+
+#: templates/newsly/pagination.html:28
+msgid "Next page"
+msgstr "Page suivante"
+
+#: templates/newsly/pagination.html:28
+#: templates/newsly/sidebar_news_nextprev.inc.html:7
+msgid "Next"
+msgstr "Suiv."
+
+#: templates/newsly/sidebar_archives.inc.html:3
+msgid "Archives"
+msgstr "Archives"
+
+#: templates/newsly/sidebar_authors.inc.html:3
+msgid "Authors"
+msgstr "Auteurs"
+
+#: templates/newsly/sidebar_news_documents.inc.html:6
+msgid "Attachments"
+msgstr "Attachements"
+
+#: templates/newsly/sidebar_news_nextprev.inc.html:13
+msgid "Previous"
+msgstr "Précédent"

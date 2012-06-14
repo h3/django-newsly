@@ -30,7 +30,7 @@ class NewsCategory(models.Model):
 
 class News(models.Model):
     title = models.CharField(_("Title"), max_length=250)
-    slug  = models.CharField(_("Slug"), max_length=250)
+    slug  = models.CharField(_("Slug"), max_length=250, unique=True)
     author = models.ForeignKey(User)
 
     teaser = models.TextField(_("Text"))

@@ -19,8 +19,11 @@ translator.register(NewsVideo, NewsVideoTranslationOptions)
 class NewsDocumentTranslationOptions(TranslationOptions):
     fields = ('title', )
 translator.register(NewsDocument, NewsDocumentTranslationOptions)
+<<<<<<< HEAD
 
 
 class NewsCategoryTranslationOptions(TranslationOptions):
     fields = ('title', )
 translator.register(NewsCategory, NewsCategoryTranslationOptions)
+=======
+>>>>>>> 3744520706572962ef13cb0de2c392f396aa5906

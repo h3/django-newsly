@@ -4,11 +4,11 @@
 <div class="news-photos">
     <h2>{% trans "Photos" %}</h2>
     <a href="{{ object.newsphoto_set.all.0.photo.url }}" class="news-photo-thumb colorbox-link" title="{{ object.newsphoto_set.all.0.title }}" rel="news-photo-gallery">
-        <img src="{% thumbnail object.newsphoto_set.all.0.photo 250x250 crop %}" alt="{{ object.newsphoto_set.all.0.title }}">
+        <img src="{% thumbnail object.newsphoto_set.all.0.photo first_thumbnail_size crop %}" alt="{{ object.newsphoto_set.all.0.title }}">
     </a>
     {% for photo in object.newsphoto_set.all|slice:"1:" %}
     <a href="{{ photo.photo.url }}" class="news-photo-thumb colorbox-link" title="{{ photo.title }}" rel="news-photo-gallery">
-        <img src="{% thumbnail photo.photo 69x69 crop %}" alt="{{ photo.title }}">
+        <img src="{% thumbnail photo.photo thumbnail_size crop %}" alt="{{ photo.title }}">
     </a>
     {% endfor %}
 </div>
