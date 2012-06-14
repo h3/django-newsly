@@ -14,9 +14,11 @@
 {% endblock %}
 
 {% block page.content %}
-{% frontadmin request "newsly.news" %}
+{% frontadmin request "newsly.News" %}
 {% for news in object_list %}
+{% frontadmin request news %}
 {% include "newsly/news_teaser.inc.html" %}
+{% endfrontadmin %}
 {% endfor %}
 {% endfrontadmin %}
 {% endblock %}
