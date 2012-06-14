@@ -30,7 +30,7 @@ class NewsView(ListView):
     def get_context_data(self, **kwargs):
         context = super(NewsView, self).get_context_data(**kwargs)
         context['date_list']   = News.objects.values('date_publish')
-        context['category_list']   = News.objects.values('category', 'category__title').order_by('category__title').distinct()
+        context['category_list']   = News.objects.values('category', 'category__title', 'category__title_en', 'category__title_fr',).order_by('category__title').distinct()
         context['author_list'] = News.objects.values('author', 'author__username', \
                 'author__first_name', 'author__last_name').order_by('author__username').distinct()
         return context

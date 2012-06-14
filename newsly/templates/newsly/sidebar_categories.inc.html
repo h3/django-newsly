@@ -7,11 +7,21 @@
             {# The slugify filter is a dirty hack to ensure we are comparing a string with a string #}
             {% if request.GET.c == news.category|slugify %}
             <span>
-                {{ news.category__title }}
+                {% get_current_language as lang %}
+                {% if lang == 'fr' %}
+                    {{ news.category__title_fr }}
+                {% else %}
+                    {{ news.category__title_en }}
+                {% endif %}
             </span>
             {% else %}
             <a href="?c={{ news.category }}">
-                {{ news.category__title }}
+                {% get_current_language as lang %}
+                {% if lang == 'fr' %}
+                    {{ news.category__title_fr }}
+                {% else %}
+                    {{ news.category__title_en }}
+                {% endif %}
             </a>
             {% endif %}
         </li>
