@@ -1,0 +1,20 @@
+{% load i18n %}
+<div class="news-categories">
+    <h2>{% trans "Categories" %}</h2>
+    <ul>
+        {% for news in category_list %}
+        <li>
+            {# The slugify filter is a dirty hack to ensure we are comparing a string with a string #}
+            {% if request.GET.c == news.category|slugify %}
+            <span>
+                {{ news.category__title }}
+            </span>
+            {% else %}
+            <a href="?c={{ news.category }}">
+                {{ news.category__title }}
+            </a>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</div>

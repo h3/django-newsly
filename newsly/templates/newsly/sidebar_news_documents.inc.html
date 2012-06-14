@@ -6,7 +6,7 @@
     <h2>{% trans "Attachments" %}</h2>
     <ul>
         {% for document in object.newsdocument_set.all %}
-        <li><a href="{{ document.document_en.url }}" class="file {{ document.document_en.path|get_file_extension }}">{{ document }}</a></li>
+        <li><a href="{{ document.document.url }}" class="file {{ document.document.path|get_file_extension }}">{{ document }}</a></li>
         {% endfor %}
     </ul>
 </div>

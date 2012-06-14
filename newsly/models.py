@@ -111,7 +111,7 @@ class NewsVideo(NewsMediaBase):
 
 
 class NewsDocument(NewsMediaBase):
-    document = models.FileField(_('Document (fr)'), upload_to=get_news_document_path)
+    document = models.FileField(_('Document'), upload_to=get_news_document_path)
     
     def __unicode__(self):
         return u'%s' % self.title
