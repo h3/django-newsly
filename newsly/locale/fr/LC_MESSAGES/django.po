@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-04-17 10:54-0400\n"
+"POT-Creation-Date: 2012-06-14 13:08-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Maxime Haineault <max@motion-m.ca>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,92 +18,96 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: admin.py:82 models.py:25 models.py:30 models.py:80
+#: admin.py:58 models.py:25 models.py:32 models.py:82
 msgid "Title"
 msgstr "Titre"
 
-#: admin.py:85
+#: admin.py:61
 msgid "Teaser"
 msgstr "Apperçu"
 
-#: admin.py:88
+#: admin.py:64
 msgid "Content"
 msgstr "Contenu"
 
-#: admin.py:91
+#: admin.py:67
 msgid "SEO"
 msgstr "SEO"
 
-#: models.py:26 models.py:31
+#: models.py:26 models.py:33
 msgid "Slug"
 msgstr "Slug"
 
-#: models.py:34 models.py:35
+#: models.py:36 models.py:37
 msgid "Text"
 msgstr "Texte"
 
-#: models.py:43
+#: models.py:45
 msgid "Meta description"
 msgstr "Description (méta)"
 
-#: models.py:44
+#: models.py:46
 msgid "Meta keywords"
 msgstr "Mots-clés (méta)"
 
-#: models.py:75 models.py:76 templates/newsly/news_detail.html:7
-#: templates/newsly/news_detail.html:17 templates/newsly/news_list.html:6
-#: templates/newsly/news_list.html.py:7 templates/newsly/news_list.html:16
+#: models.py:77 models.py:78 templates/newsly/base.html:4
+#: templates/newsly/base.html.py:15 templates/newsly/news_detail.html:11
+#: templates/newsly/news_list.html:4 templates/newsly/news_list.html.py:13
 msgid "News"
 msgstr "Nouvelles"
 
-#: models.py:81
+#: models.py:83
 msgid "Is Visible"
 msgstr "Es visible"
 
-#: models.py:97 models.py:99
+#: models.py:99 models.py:101
 msgid "Photo"
 msgstr "Photo"
 
-#: models.py:100 templates/newsly/sidebar_news_photos.inc.html:5
+#: models.py:102 templates/newsly/sidebar_news_photos.inc.html:5
 msgid "Photos"
 msgstr "Photos"
 
-#: models.py:105
+#: models.py:107
 msgid "URL"
 msgstr "URL"
 
-#: models.py:107
+#: models.py:109
 msgid "Video"
 msgstr "Vidéo"
 
-#: models.py:108 templates/newsly/sidebar_news_videos.inc.html:5
+#: models.py:110 templates/newsly/sidebar_news_videos.inc.html:5
 msgid "Videos"
 msgstr "Vidéos"
 
-#: models.py:112 models.py:118
+#: models.py:114 models.py:120
 msgid "Document"
 msgstr "Document"
 
-#: models.py:119
+#: models.py:121
 msgid "Documents"
 msgstr "Documents"
 
-#: templates/newsly/news_detail.html:13 templates/newsly/news_list.html:12
+#: templates/newsly/news_detail.html:7 templates/newsly/news_list.html:9
 #, python-format
 msgid "Last updated: %(date_added)s"
 msgstr "Dernière mise à jour: %(date_added)s"
 
-#: templates/newsly/news_detail.html:16 templates/newsly/news_list.html:15
+#: templates/newsly/news_detail.html:10 templates/newsly/news_list.html:12
 msgid "Home"
 msgstr "Accueil"
 
 #: templates/newsly/news_meta.inc.html:5
 msgid "Author"
-msgstr "Ateur"
+msgstr "Auteur"
 
 #: templates/newsly/news_meta.inc.html:8
 msgid "Date"
 msgstr "Date"
+
+#: templates/newsly/news_meta.inc.html:10
+msgid "Category"
+msgstr "Categorie"
 
 #: templates/newsly/pagination.html:5
 msgid "Previous page"
@@ -129,6 +133,10 @@ msgstr "Archives"
 #: templates/newsly/sidebar_authors.inc.html:3
 msgid "Authors"
 msgstr "Auteurs"
+
+#: templates/newsly/sidebar_categories.inc.html:3
+msgid "Categories"
+msgstr "Catégories"
 
 #: templates/newsly/sidebar_news_documents.inc.html:6
 msgid "Attachments"
