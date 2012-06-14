@@ -1,5 +1,5 @@
 from modeltranslation.translator import translator, TranslationOptions
-from newsly.models import News, NewsPhoto, NewsVideo, NewsDocument
+from newsly.models import News, NewsPhoto, NewsVideo, NewsDocument, NewsCategory
 
 class NewsTranslationOptions(TranslationOptions):
     fields = ('title', 'teaser', 'body',)
@@ -20,3 +20,7 @@ class NewsDocumentTranslationOptions(TranslationOptions):
     fields = ('title', )
 translator.register(NewsDocument, NewsDocumentTranslationOptions)
 
+
+class NewsCategoryTranslationOptions(TranslationOptions):
+    fields = ('title', )
+translator.register(NewsCategory, NewsCategoryTranslationOptions)

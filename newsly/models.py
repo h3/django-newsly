@@ -24,6 +24,8 @@ class PublishedNewsManager(models.Manager):
 class NewsCategory(models.Model):
     title = models.CharField(_("Title"), max_length=250)
     slug  = models.CharField(_("Slug"), max_length=250)
+    def __unicode__(self):
+        return u'%s' % self.title
 
 
 class News(models.Model):

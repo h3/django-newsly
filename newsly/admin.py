@@ -50,3 +50,9 @@ class NewsAdmin(ModelAdmin):
         js = NEWSLY_JS
 
 admin.site.register(News, NewsAdmin)
+
+
+class NewsCategoryAdmin(ModelAdmin):
+    list_display = ('title',)
+    prepopulated_fields = {'slug': ('title',)}
+admin.site.register(NewsCategory, NewsCategoryAdmin)
