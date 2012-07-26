@@ -1,3 +1,11 @@
+Installation
+============
+
+In `settings.py` add `newsly` to your `INSTALLED_APPS`.
+
+Add `(r'news/', include('newsly.urls')),` to your `urls.py`.
+
+
 Credits
 =======
 
