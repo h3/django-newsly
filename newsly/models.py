@@ -7,9 +7,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.db.models.signals import post_delete
 
-from positions.fields import PositionField
-from positions.managers import PositionManager
-
 from newsly.utils import file_cleanup, get_news_photo_path, get_news_document_path
 from newsly.conf import settings
 
@@ -83,9 +80,7 @@ class NewsMediaBase(models.Model):
     is_visible  = models.BooleanField(_('Is Visible'), default=True)
     date_added  = models.DateTimeField(auto_now_add=True)
     news        = models.ForeignKey(News)
-    position    = PositionField()
-
-    objects     = PositionManager()
+    position    = models.PositiveIntegerField(default=0)
 
     def __unicode__(self):
         return u'%s' % self.title

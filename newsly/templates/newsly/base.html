@@ -8,9 +8,7 @@
 {% block content %}
 <div id="newsly-page">
     <div id="{% block page.id %}{% endblock %}" class="{% block page.class %}{% endblock %}">
-        <div class="breadcrumb">
-            {% block page.breadcrumbs %}{% endblock %}
-        </div>
+        {% block page.breadcrumbs %}{% endblock %}
         <div id="newsly-content">
             <h1>{% trans "News" %}</h1>
             {% block page.content %}{% endblock %}

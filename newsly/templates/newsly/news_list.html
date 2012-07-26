@@ -9,8 +9,10 @@
 {% block page.last_updated %}{% blocktrans with date_added=object_list.0.date_added %}Last updated: {{ date_added }}{% endblocktrans %}{% endblock %}
 
 {% block page.breadcrumbs %}
-<div><a href="{% url website-home %}">{% trans "Home" %}</a></div>
-<div><span>{% trans "News" %}</span></div>
+<ul class="breadcrumb">
+    <li><a href="/">{% trans "Home" %}</a> <span class="divider">/</span></li>
+    <li class="active">{% trans "News" %}</li>
+</ul>
 {% endblock %}
 
 {% block page.content %}
