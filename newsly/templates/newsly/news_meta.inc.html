@@ -1,12 +1,30 @@
 {% load i18n %}
-{# Meta #}
-<dl class="news-meta">
-    {% if object.get_author_display %}
-    <dt>{% trans "Author" %}</dt>
-    <dd>{{ object.get_author_display }}</dd>
-    {% endif %}
-    <dt class="noborder">{% trans "Date" %}</dt>
-    <dd class="noborder">{{ object.date_added }}</dd>
-    <dt class="noborder">{% trans "Category" %}</dt>
-    <dd class="noborder">{{ object.category }}</dd>
-</dl>
+{% spaceless %}
+{% if object.get_author_display %}
+{# Author #}
+<li class="nav-header">
+    <i class="icon-user"></i> 
+    {% trans "Author" %}
+</li>
+<li><a href="#">{{ object.get_author_display }}</a></li>
+<li class="divider"></li>
+{% endif %}
+
+{# Date published #}
+<li class="nav-header">
+    <i class="icon-calendar"></i> 
+    {% trans "Published" %}
+</li>
+<li><span>{{ object.date_added }}</span></li>
+<li class="divider"></li>
+
+{# Category #}
+{% if object.category %}
+<li class="nav-header">
+    <i class="icon-calendar"></i> 
+    {% trans "Category" %}
+</li>
+<li><a href="#">{{ object.category }}</a></li>
+<li class="divider"></li>
+{% endif %}
+{% endspaceless %}

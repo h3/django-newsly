@@ -1,15 +1,23 @@
 {% load i18n thumbnail %}
 {# Photos #}
 {% if object.newsphoto_set.all %}
-<div class="news-photos">
-    <h2>{% trans "Photos" %}</h2>
-    <a href="{{ object.newsphoto_set.all.0.photo.url }}" class="news-photo-thumb colorbox-link" title="{{ object.newsphoto_set.all.0.title }}" rel="news-photo-gallery">
-        <img src="{% thumbnail object.newsphoto_set.all.0.photo first_thumbnail_size crop %}" alt="{{ object.newsphoto_set.all.0.title }}">
-    </a>
+<li class="nav-header">
+    <i class="icon-tag"></i> 
+    {% trans "Photos" %}
+</li>
+<ul class="newsly-thumbs thumbnails">
+    <li class="span3">
+        <a href="{{ object.newsphoto_set.all.0.photo.url }}" class="thumbnail" title="{{ object.newsphoto_set.all.0.title }}" rel="{{ object.slug }}">
+            <img src="{% thumbnail object.newsphoto_set.all.0.photo first_thumbnail_size crop %}" alt="{{ object.newsphoto_set.all.0.title }}">
+        </a>
+    </li>
     {% for photo in object.newsphoto_set.all|slice:"1:" %}
-    <a href="{{ photo.photo.url }}" class="news-photo-thumb colorbox-link" title="{{ photo.title }}" rel="news-photo-gallery">
-        <img src="{% thumbnail photo.photo thumbnail_size crop %}" alt="{{ photo.title }}">
-    </a>
+    <li class="span1">
+        <a href="{{ photo.photo.url }}" class="thumbnail" title="{{ photo.title }}" rel="{{ object.slug }}">
+            <img src="{% thumbnail photo.photo thumbnail_size crop %}" alt="{{ photo.title }}">
+        </a>
+    </li>
     {% endfor %}
-</div>
+</ul>
+<li class="divider"></li>
 {% endif %}
