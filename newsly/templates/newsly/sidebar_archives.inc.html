@@ -1,20 +1,21 @@
 {% load i18n %}
-<div id="news-archives">
-    <h2>{% trans "Archives" %}</h2>
-    <ul>
-        {% for news in date_list %}
-        {% ifchanged news.date_publish.month %}
-        <li>
-            {% ifchanged news.date_publish|date:"Y" %}
-            <h3>{{ news.date_publish.year }}</h3>
-            {% endifchanged %}
-            {% if request.GET.y == news.date_publish.year|slugify and request.GET.m == news.date_publish.month|slugify %}
-            <span>{{ news.date_publish|date:"F"}}</span>
-            {% else %}
-            <a href="?y={{ news.date_publish.year }}&m={{ news.date_publish.month }}">{{ news.date_publish|date:"F"}}</a>
-            {% endif %}
-        </li>
-        {% endifchanged %}
-        {% endfor %}
-    </ul>
-</div>
+{% if date_list %}
+<li class="nav-header">
+    <i class="icon-calendar"></i> 
+    {% trans "Archives" %}
+</li>
+{% for news in date_list %}
+{% ifchanged news.date_publish.month %}
+<li>
+    {% ifchanged news.date_publish|date:"Y" %}
+    <li class="nav-header nav-subheader">{{ news.date_publish.year }}</li>
+    {% endifchanged %}
+    {% if request.GET.y == news.date_publish.year|slugify and request.GET.m == news.date_publish.month|slugify %}
+    <span>{{ news.date_publish|date:"F"}}</span>
+    {% else %}
+    <a href="?y={{ news.date_publish.year }}&m={{ news.date_publish.month }}">{{ news.date_publish|date:"F"}}</a>
+    {% endif %}
+</li>
+{% endifchanged %}
+{% endfor %}
+{% endif %}

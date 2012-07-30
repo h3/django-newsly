@@ -26,7 +26,11 @@
 {% endblock %}
 
 {% block page.sidebar %}
-{% include "newsly/sidebar_archives.inc.html" %}
-{% include "newsly/sidebar_authors.inc.html" %}
-{% include "newsly/sidebar_categories.inc.html" %}
+<div class="newsly-sidebar well">
+    <ul class="nav nav-list">
+        {% include "newsly/sidebar_authors.inc.html" %}
+        {% include "newsly/sidebar_categories.inc.html" %}
+        {% include "newsly/sidebar_archives.inc.html" %}
+    </ul>
+</div>
 {% endblock %}

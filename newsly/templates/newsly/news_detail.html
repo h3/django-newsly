@@ -7,22 +7,27 @@
 {% block page.last_updated %}{% blocktrans with date_added=object.date_updated %}Last updated: {{ date_added }}{% endblocktrans %}{% endblock %}
 
 {% block page.breadcrumbs %}
-<div><a href="/">{% trans "Home" %}</a></div>
-<div><a href="{% url newsly-index 1 %}">{% trans "News" %}</a></div>
-<div><span>{{ object|truncatewords:"8" }}</span></div>
+<ul class="breadcrumb">
+    <li><a href="/">{% trans "Home" %}</a> <span class="divider">/</span></li>
+    <li><a href="{% url newsly-index 1 %}">{% trans "News" %}</a> <span class="divider">/</span></li>
+    <li class="active">{{ object|truncatewords:"15" }}</li>
+</ul>
 {% endblock %}
 
 {% block page.content %}
 {% frontadmin request object %}
-<h2>{{ object.title }}</h2>
 {% include "newsly/news_body.inc.html" %}
 {% endfrontadmin %}
 {% endblock %}
 
 {% block page.sidebar %}
-{% include "newsly/news_meta.inc.html" %}
-{% include "newsly/sidebar_news_documents.inc.html" %}
-{% include "newsly/sidebar_news_videos.inc.html" %}
-{% include "newsly/sidebar_news_photos.inc.html" %}
-{% include "newsly/sidebar_news_nextprev.inc.html" %}
+<div class="well">
+    <ul class="nav nav-list">
+        {% include "newsly/news_meta.inc.html" %}
+        {% include "newsly/sidebar_news_documents.inc.html" %}
+        {% include "newsly/sidebar_news_videos.inc.html" %}
+        {% include "newsly/sidebar_news_photos.inc.html" %}
+        {% include "newsly/sidebar_news_nextprev.inc.html" %}
+    </ul>
+</div>
 {% endblock %}

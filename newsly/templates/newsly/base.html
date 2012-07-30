@@ -6,19 +6,19 @@
 {% block meta.keywords %}{% firstof object.keywords request.meta.keywords %}{% endblock %}
 
 {% block content %}
-<div id="newsly-page">
-    <div id="{% block page.id %}{% endblock %}" class="{% block page.class %}{% endblock %}">
-        {% block page.breadcrumbs %}{% endblock %}
-        <div id="newsly-content">
-            <h1>{% trans "News" %}</h1>
+<div id="newsly-list" class="newsly-page">
+    <h1>{% trans "News" %}</h1>
+    {% block page.breadcrumbs %}{% endblock %}
+    <div id="{% block page.id %}{% endblock %}" class="row">
+        <div id="newsly-content" class="span9">
             {% block page.content %}{% endblock %}
         </div>
-        <div class="newsly-sidebar">
+        <div class="newsly-sidebar span3">
             {% block page.sidebar %}{% endblock %}
         </div>
-        {% if is_paginated %}
-        <div class="pagination">{% include "pagination.html" %}</div>
-        {% endif %}
     </div>
+    {% if is_paginated %}
+    <div class="pagination">{% include "pagination.html" %}</div>
+    {% endif %}
 </div>
 {% endblock %}

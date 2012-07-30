@@ -1,30 +1,22 @@
 {% load i18n %}
-<div id="news-categories">
-    <h2>{% trans "Categories" %}</h2>
-    <ul>
-        {% for news in category_list %}
-        <li>
-            {# The slugify filter is a dirty hack to ensure we are comparing a string with a string #}
-            {% if request.GET.c == news.category|slugify %}
-            <span>
-                {% get_current_language as lang %}
-                {% if lang == 'fr' %}
-                    {{ news.category__title_fr }}
-                {% else %}
-                    {{ news.category__title_en }}
-                {% endif %}
-            </span>
-            {% else %}
-            <a href="?c={{ news.category }}">
-                {% get_current_language as lang %}
-                {% if lang == 'fr' %}
-                    {{ news.category__title_fr }}
-                {% else %}
-                    {{ news.category__title_en }}
-                {% endif %}
-            </a>
-            {% endif %}
-        </li>
-        {% endfor %}
-    </ul>
-</div>
+{% if category_list %}
+<li class="nav-header">
+    <i class="icon-tag"></i> 
+    {% trans "Categories" %}
+</li>
+{% for news in category_list %}
+<li>
+    {# The slugify filter is a dirty hack to ensure we are comparing a string with a string #}
+    {% if request.GET.c == news.category|slugify %}
+    <span>
+        {{ news.category__title }}
+    </span>
+    {% else %}
+    <a href="?c={{ news.category }}">
+        {{ news.category__title }}
+    </a>
+    {% endif %}
+</li>
+{% endfor %}
+<li class="divider"></li>
+{% endif %}
