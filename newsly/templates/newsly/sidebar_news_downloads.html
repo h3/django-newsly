@@ -1,0 +1,12 @@
+{% load i18n newsly_tags %}
+
+{# Downloads #}
+{% if object.newsdocument_set.all %}
+<li class="nav-header">
+    <i class="icon-tag"></i> 
+    {% trans "Downloads" %}
+</li>
+{% for document in object.newsdocument_set.all %}
+<li><a href="{{ document.document.url }}" class="file {{ document.document.path|get_file_extension }}">{{ document }}</a></li>
+{% endfor %}
+{% endif %}
