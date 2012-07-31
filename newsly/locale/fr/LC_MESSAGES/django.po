@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-06-14 13:08-0400\n"
+"POT-Creation-Date: 2012-07-31 11:38-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Maxime Haineault <max@motion-m.ca>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: admin.py:58 models.py:25 models.py:32 models.py:82
+#: admin.py:58 models.py:22 models.py:34 models.py:84
 msgid "Title"
 msgstr "Titre"
 
@@ -34,29 +34,37 @@ msgstr "Contenu"
 msgid "SEO"
 msgstr "SEO"
 
-#: models.py:26 models.py:33
+#: models.py:23 models.py:35
 msgid "Slug"
 msgstr "Slug"
 
-#: models.py:36 models.py:37
+#: models.py:29
+msgid "News category"
+msgstr "Categorie de nouvelle"
+
+#: models.py:30
+msgid "News categories"
+msgstr "Catégories de nouvelle"
+
+#: models.py:38 models.py:39
 msgid "Text"
 msgstr "Texte"
 
-#: models.py:45
+#: models.py:47
 msgid "Meta description"
 msgstr "Description (méta)"
 
-#: models.py:46
+#: models.py:48
 msgid "Meta keywords"
 msgstr "Mots-clés (méta)"
 
-#: models.py:77 models.py:78 templates/newsly/base.html:4
-#: templates/newsly/base.html.py:15 templates/newsly/news_detail.html:11
-#: templates/newsly/news_list.html:4 templates/newsly/news_list.html.py:13
+#: models.py:79 models.py:80 templates/newsly/base.html:4
+#: templates/newsly/base.html.py:10 templates/newsly/news_detail.html:12
+#: templates/newsly/news_list.html:4 templates/newsly/news_list.html.py:14
 msgid "News"
 msgstr "Nouvelles"
 
-#: models.py:83
+#: models.py:85
 msgid "Is Visible"
 msgstr "Es visible"
 
@@ -64,7 +72,7 @@ msgstr "Es visible"
 msgid "Photo"
 msgstr "Photo"
 
-#: models.py:102 templates/newsly/sidebar_news_photos.inc.html:5
+#: models.py:102 templates/newsly/sidebar_news_photos.inc.html:6
 msgid "Photos"
 msgstr "Photos"
 
@@ -76,7 +84,7 @@ msgstr "URL"
 msgid "Video"
 msgstr "Vidéo"
 
-#: models.py:110 templates/newsly/sidebar_news_videos.inc.html:5
+#: models.py:110
 msgid "Videos"
 msgstr "Vidéos"
 
@@ -93,19 +101,19 @@ msgstr "Documents"
 msgid "Last updated: %(date_added)s"
 msgstr "Dernière mise à jour: %(date_added)s"
 
-#: templates/newsly/news_detail.html:10 templates/newsly/news_list.html:12
+#: templates/newsly/news_detail.html:11 templates/newsly/news_list.html:13
 msgid "Home"
 msgstr "Accueil"
 
-#: templates/newsly/news_meta.inc.html:5
+#: templates/newsly/news_meta.inc.html:7
 msgid "Author"
 msgstr "Auteur"
 
-#: templates/newsly/news_meta.inc.html:8
-msgid "Date"
-msgstr "Date"
+#: templates/newsly/news_meta.inc.html:22
+msgid "Published"
+msgstr "Publié le"
 
-#: templates/newsly/news_meta.inc.html:10
+#: templates/newsly/news_meta.inc.html:33
 msgid "Category"
 msgstr "Categorie"
 
@@ -122,26 +130,48 @@ msgid "Next page"
 msgstr "Page suivante"
 
 #: templates/newsly/pagination.html:28
-#: templates/newsly/sidebar_news_nextprev.inc.html:7
+#: templates/newsly/sidebar_news_nextprev.inc.html:12
 msgid "Next"
 msgstr "Suiv."
 
-#: templates/newsly/sidebar_archives.inc.html:3
+#: templates/newsly/sidebar_archives.inc.html:5
 msgid "Archives"
 msgstr "Archives"
 
-#: templates/newsly/sidebar_authors.inc.html:3
+#: templates/newsly/sidebar_archives.inc.html:9
+#: templates/newsly/sidebar_archives.inc.html:11
+msgid "Any time"
+msgstr "Tout"
+
+#: templates/newsly/sidebar_authors.inc.html:6
 msgid "Authors"
 msgstr "Auteurs"
 
-#: templates/newsly/sidebar_categories.inc.html:3
+#: templates/newsly/sidebar_authors.inc.html:10
+#: templates/newsly/sidebar_authors.inc.html:12
+#: templates/newsly/sidebar_categories.inc.html:9
+#: templates/newsly/sidebar_categories.inc.html:11
+msgid "All"
+msgstr "Tout"
+
+#: templates/newsly/sidebar_categories.inc.html:5
 msgid "Categories"
 msgstr "Catégories"
 
-#: templates/newsly/sidebar_news_documents.inc.html:6
-msgid "Attachments"
-msgstr "Attachements"
+#: templates/newsly/sidebar_news_downloads.html:7
+msgid "Downloads"
+msgstr "Téléchargements"
 
-#: templates/newsly/sidebar_news_nextprev.inc.html:13
+#: templates/newsly/sidebar_news_nextprev.inc.html:7
 msgid "Previous"
 msgstr "Précédent"
+
+#: templates/newsly/sidebar_news_videos.inc.html:7
+msgid "Video(s)"
+msgstr "Vidéo(s)"
+
+#~ msgid "Date"
+#~ msgstr "Date"
+
+#~ msgid "Attachments"
+#~ msgstr "Attachements"
