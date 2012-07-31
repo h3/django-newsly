@@ -6,7 +6,13 @@
     <i class="icon-user"></i> 
     {% trans "Author" %}
 </li>
-<li><a href="#">{{ object.get_author_display }}</a></li>
+<li>
+    {% if request.GET.a %}
+    <span class="label label-info">{{ object.get_author_display }}</span>
+    {% else %}
+    <a href="?a={{ object.author_id }}{% if request.GET.c %}&c={{ request.GET.c }}{% endif %}{% if request.GET.y %}&y={{ request.GET.y }}{% endif %}{% if request.GET.m %}&m={{ request.GET.m }}{% endif %}">{{ object.get_author_display }}</a>
+    {% endif %}
+</li>
 <li class="divider"></li>
 {% endif %}
 
@@ -21,10 +27,20 @@
 {# Category #}
 {% if object.category %}
 <li class="nav-header">
-    <i class="icon-calendar"></i> 
+    <i class="icon-tag"></i> 
     {% trans "Category" %}
 </li>
-<li><a href="#">{{ object.category }}</a></li>
+<li>
+    {% if request.GET.c %}
+    <span class="label label-info">{{ object.category }}</span>
+    {% else %}
+    <a href="?c={{ object.category_id }}
+        {% if request.GET.a %}&a={{ request.GET.a }}{% endif %}
+        {% if request.GET.y %}&y={{ request.GET.y }}{% endif %}
+        {% if request.GET.m %}&y={{ request.GET.m }}{% endif %}
+    ">{{ object.category }}</a>
+    {% endif %}
+</li>
 <li class="divider"></li>
 {% endif %}
 {% endspaceless %}

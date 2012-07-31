@@ -3,7 +3,7 @@
 {# Documents #}
 {% if object.newsdocument_set.all %}
 <div class="news-documents">
-    <h2>{% trans "Attachments" %}</h2>
+    <h2>{% trans "Downloads" %}</h2>
     <ul>
         {% for document in object.newsdocument_set.all %}
         <li><a href="{{ document.document.url }}" class="file {{ document.document.path|get_file_extension }}">{{ document }}</a></li>

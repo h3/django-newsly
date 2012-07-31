@@ -4,6 +4,13 @@
     <i class="icon-calendar"></i> 
     {% trans "Archives" %}
 </li>
+<li>
+    {% if request.GET.y or request.GET.m or request.GET.d %}
+    <a href="?y=&m=&d={% if request.GET.a %}&a={{ request.GET.a }}{% endif %}{% if request.GET.c %}&c={{ request.GET.c }}{% endif %}">{% trans "Any time" %}</a>
+    {% else %}
+    <span class="label label-info">{% trans "Any time" %}</span>
+    {% endif %}
+</li>
 {% for news in date_list %}
 {% ifchanged news.date_publish.month %}
 <li>
@@ -11,9 +18,9 @@
     <li class="nav-header nav-subheader">{{ news.date_publish.year }}</li>
     {% endifchanged %}
     {% if request.GET.y == news.date_publish.year|slugify and request.GET.m == news.date_publish.month|slugify %}
-    <span>{{ news.date_publish|date:"F"}}</span>
+    <span class="label label-info">{{ news.date_publish|date:"F"}}</span>
     {% else %}
-    <a href="?y={{ news.date_publish.year }}&m={{ news.date_publish.month }}">{{ news.date_publish|date:"F"}}</a>
+    <a href="?y={{ news.date_publish.year }}&m={{ news.date_publish.month }}{% if request.GET.a %}&a={{ request.GET.a }}{% endif %}{% if request.GET.c %}&c={{ request.GET.c }}{% endif %}">{{ news.date_publish|date:"F"}}</a>
     {% endif %}
 </li>
 {% endifchanged %}

@@ -1,15 +1,23 @@
 {% load i18n %}
+{% spaceless %}
 {% if author_list %}
 <li class="nav-header">
     <i class="icon-user"></i> 
     {% trans "Authors" %}
+</li>
+<li>
+    {% if request.GET.a %}
+    <a href="?a={% if request.GET.c %}&c={{ request.GET.c }}{% endif %}{% if request.GET.y %}&y={{ request.GET.y }}{% endif %}{% if request.GET.m %}&m={{ request.GET.m }}{% endif %}{% if request.GET.d %}&d={{ request.GET.d }}{% endif %}">{% trans "All" %}</a>
+    {% else %}
+    <span class="label label-info">{% trans "All" %}</span>
+    {% endif %}
 </li>
 {% for news in author_list %}
 <li>
 {#<a href="#">Library</a>#}
     {# The slugify filter is a dirty hack to ensure we are comparing a string with a string #}
     {% if request.GET.a == news.author|slugify %}
-    <span>
+    <span class="label label-info">
         {% if news.author__first_name %}
         {{ news.author__first_name }} {{ news.author__last_name }}
         {% else %}
@@ -17,7 +25,7 @@
         {% endif %}
     </span>
     {% else %}
-    <a href="?a={{ news.author }}">
+    <a href="?a={{ news.author }}{% if request.GET.c %}&c={{ request.GET.c }}{% endif %}{% if request.GET.y %}&y={{ request.GET.y }}{% endif %}{% if request.GET.m %}&m={{ request.GET.m }}{% endif %}">
         {% if news.author__first_name %}
         {{ news.author__first_name }} {{ news.author__last_name }}
         {% else %}
@@ -29,3 +37,4 @@
 {% endfor %}
 <li class="divider"></li>
 {% endif %}
+{% endspaceless %}
