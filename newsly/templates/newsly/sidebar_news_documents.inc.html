@@ -2,12 +2,12 @@
 
 {# Documents #}
 {% if object.newsdocument_set.all %}
-<div class="news-documents">
-    <h2>{% trans "Attachments" %}</h2>
-    <ul>
-        {% for document in object.newsdocument_set.all %}
-        <li><a href="{{ document.document.url }}" class="file {{ document.document.path|get_file_extension }}">{{ document }}</a></li>
-        {% endfor %}
-    </ul>
-</div>
+<li class="nav-header">
+    <i class="icon-file"></i> 
+    {% trans "Attachments" %}
+</li>
+{% for document in object.newsdocument_set.all %}
+<li><a href="{{ document.document.url }}" class="file {{ document.document.path|get_file_extension }}">{{ document }}</a></li>
+{% endfor %}
+<li class="divider"></li>
 {% endif %}

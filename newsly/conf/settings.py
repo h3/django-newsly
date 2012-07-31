@@ -9,6 +9,6 @@ GRPAPPELLI_TINYMCE = getattr(settings, 'NEWSLY_GRPAPPELLI_TINYMCE', False)
 GRPAPPELLI_TINYMCE_SRC = getattr(settings, 'NEWSLY_GRPAPPELLI_TINYMCE_SRC',  'grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js')
 GRPAPPELLI_TINYMCE_CONF = getattr(settings, 'NEWSLY_GRPAPPELLI_TINYMCE_CONF', 'website/js/tinymce_setup.js')
 
-VIDEOS_SIZE = getattr(settings, 'NEWSLY_VIDEOS_SIZE', '240')
+VIDEOS_SIZE = getattr(settings, 'NEWSLY_VIDEOS_SIZE', '190')
 FIRST_THUMBNAIL_SIZE = getattr(settings, 'NEWSLY_FIRST_THUMBNAIL_SIZE', '190x190')
 THUMBNAIL_SIZE = getattr(settings, 'NEWSLY_THUMBNAIL_SIZE', '94x94')
