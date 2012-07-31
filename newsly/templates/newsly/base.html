@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% load i18n thumbnail generic_flatblocks frontadmin_tags markup %}
 
-{% block app.title %}{% firstof object.title request.meta.title %} / {% trans "News" %} / {% endblock %}
-{% block meta.description %}{% firstof object.description request.meta.desc %}{% endblock %}
-{% block meta.keywords %}{% firstof object.keywords request.meta.keywords %}{% endblock %}
+{% block app.title %}{% firstof object.title|capfirst meta.title|capfirst %}{% if object.title or meta.title %} / {% endif %}{% trans "News" %} / {% endblock %}
+{% block meta.description %}{% firstof object.description meta.desc %}{% endblock %}
+{% block meta.keywords %}{% firstof object.keywords meta.keywords %}{% endblock %}
 
 {% block content %}
 <div id="newsly-list" class="newsly-page">

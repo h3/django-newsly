@@ -1,6 +1,6 @@
 {% load i18n markup %}
 <div class="hero-unit newsly-teaser">
-    <h1>{{ object.title }}</h1>
+    <h1>{{ object.title|capfirst }}</h1>
     {% if grappelli_tinymce %}
     {{ object.teaser|safe }}
     {% else %}

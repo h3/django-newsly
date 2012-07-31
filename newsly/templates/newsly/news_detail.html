@@ -10,7 +10,7 @@
 <ul class="breadcrumb">
     <li><a href="/">{% trans "Home" %}</a> <span class="divider">/</span></li>
     <li><a href="{% url newsly-index 1 %}">{% trans "News" %}</a> <span class="divider">/</span></li>
-    <li class="active">{{ object|truncatewords:"15" }}</li>
+    <li class="active">{{ object|truncatewords:"15"|capfirst }}</li>
 </ul>
 {% endblock %}
 
