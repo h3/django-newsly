@@ -21,11 +21,13 @@
     <i class="icon-calendar"></i> 
     {% trans "Published" %}
 </li>
-<li><span>{{ object.date_added }}</span></li>
+<li>
+    <span>{{ object.date_added|date:"D d M Y" }}</span>
+</li>
 <li class="divider"></li>
 
 {# Category #}
-{% if object.category %}
+{% if object.category and not compact %}
 <li class="nav-header">
     <i class="icon-tag"></i> 
     {% trans "Category" %}
