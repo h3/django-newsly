@@ -4,17 +4,20 @@
     <i class="icon-tag"></i> 
     {% trans "Categories" %}
 </li>
+<li>
+    {% if request.GET.c %}
+    <a href="?c={% if request.GET.a %}&a={{ request.GET.a }}{% endif %}{% if request.GET.y %}&y={{ request.GET.y }}{% endif %}{% if request.GET.m %}&m={{ request.GET.m }}{% endif %}">{% trans "All" %}</a>
+    {% else %}
+    <span class="label label-info">{% trans "All" %}</span>
+    {% endif %}
+</li>
 {% for news in category_list %}
 <li>
     {# The slugify filter is a dirty hack to ensure we are comparing a string with a string #}
-    {% if request.GET.c == news.category|slugify %}
-    <span>
-        {{ news.category__title }}
-    </span>
+    {% if request.GET.c and request.GET.c|lower == news.category|slugify %}
+    <span class="label label-info">{{ news.category__title }}</span>
     {% else %}
-    <a href="?c={{ news.category }}">
-        {{ news.category__title }}
-    </a>
+    <a href="?c={{ news.category__pk }}{% if request.GET.a %}&a={{ request.GET.a }}{% endif %}{% if request.GET.y %}&y={{ request.GET.y }}{% endif %}{% if request.GET.m %}&m={{ request.GET.m }}{% endif %}">{{ news.category__title }}</a>
     {% endif %}
 </li>
 {% endfor %}
