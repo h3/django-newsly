@@ -1,11 +1,14 @@
 {% load i18n newsly_tags %}
 {# Videos #}
 {% if object.newsvideo_set.all %}
-<div class="news-videos">
-    <h2>{% trans "Videos" %}</h2>
+<li class="nav-header">
+    <i class="icon-tag"></i> 
+    {% trans "Videos" %}
+</li>
+<li>
     {% for video in object.newsvideo_set.all %}
     {{ video.title }}
     {% embed_player video.video video_size %}
     {% endfor %}
-</div>
+</li>
 {% endif %}
