@@ -19,7 +19,10 @@ class NewsView(ListView):
         if a:
             qs = News.objects.filter(author=a)
         elif c:
-            qs = News.objects.filter(category=c)
+            if c == 'None':
+                qs = News.objects.filter(category__isnull=True)
+            else:
+                qs = News.objects.filter(category=c)
         elif y and m:
             qs = News.objects.filter(date_publish__year=y, date_publish__month=m)
         else:
@@ -30,7 +33,7 @@ class NewsView(ListView):
     def get_context_data(self, **kwargs):
         context = super(NewsView, self).get_context_data(**kwargs)
         context['date_list']   = News.objects.values('date_publish')
-        context['category_list']   = News.objects.values('category', 'category__title').order_by('category__title').distinct()
+        context['category_list']   = News.objects.values('category', 'category__title', 'category__pk').order_by('category__title').distinct()
         context['author_list'] = News.objects.values('author', 'author__username', \
                 'author__first_name', 'author__last_name').order_by('author__username').distinct()
         return context
