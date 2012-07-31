@@ -10,7 +10,7 @@
     {% if request.GET.a %}
     <span class="label label-info">{{ object.get_author_display }}</span>
     {% else %}
-    <a href="?a={{ object.author_id }}{% if request.GET.c %}&c={{ request.GET.c }}{% endif %}{% if request.GET.y %}&y={{ request.GET.y }}{% endif %}{% if request.GET.m %}&m={{ request.GET.m }}{% endif %}">{{ object.get_author_display }}</a>
+    <a href="{% url newsly-index 1 %}?a={{ object.author_id }}{% if request.GET.c %}&c={{ request.GET.c }}{% endif %}{% if request.GET.y %}&y={{ request.GET.y }}{% endif %}{% if request.GET.m %}&m={{ request.GET.m }}{% endif %}">{{ object.get_author_display }}</a>
     {% endif %}
 </li>
 <li class="divider"></li>
@@ -34,10 +34,7 @@
     {% if request.GET.c %}
     <span class="label label-info">{{ object.category }}</span>
     {% else %}
-    <a href="?c={{ object.category_id }}
-        {% if request.GET.a %}&a={{ request.GET.a }}{% endif %}
-        {% if request.GET.y %}&y={{ request.GET.y }}{% endif %}
-        {% if request.GET.m %}&y={{ request.GET.m }}{% endif %}
+    <a href="{% url newsly-index 1 %}?c={{ object.category_id }}{% if request.GET.a %}&a={{ request.GET.a }}{% endif %}{% if request.GET.y %}&y={{ request.GET.y }}{% endif %}{% if request.GET.m %}&m={{ request.GET.m }}{% endif %}
     ">{{ object.category }}</a>
     {% endif %}
 </li>
