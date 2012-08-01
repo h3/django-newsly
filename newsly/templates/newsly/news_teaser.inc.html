@@ -1,4 +1,4 @@
-{% load thumbnail %}
+{% load thumbnail markup %}
 <div class="newsly-object">
     <h2><a href="{{ news.get_absolute_url }}">{{ news }}</a></h2>
     <ul class="nav nav-list-horizontal">
@@ -8,6 +8,10 @@
         {% if news.newsphoto_set.all %}
         <a href="{{ news.newsphoto_set.all.0.photo.url }}" class="newsly-photo-thumb pull-left" title="{{ photo.title }}" rel="gallery"><img src="{% thumbnail news.newsphoto_set.all.0.photo 100x100 crop %}" alt="{{ photo.title }}"></a>
         {% endif %}
-        {{ news.teaser|linebreaks }}
+        {% if grappelli_tinymce %}
+        {{ news.teaser|safe }}
+        {% else %}
+        {{ news.teaser|textile }}
+        {% endif %}
     </div>
 </div>

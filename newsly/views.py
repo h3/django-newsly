@@ -36,6 +36,7 @@ class NewsView(ListView):
         context['category_list']   = News.objects.values('category', 'category__title', 'category__pk').order_by('category__title').distinct()
         context['author_list'] = News.objects.values('author', 'author__username', \
                 'author__first_name', 'author__last_name').order_by('author__username').distinct()
+        context['grappelli_tinymce'] = newsly_settings.GRPAPPELLI_TINYMCE
         return context
 
 
