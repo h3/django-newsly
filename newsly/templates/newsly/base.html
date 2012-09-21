@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n thumbnail generic_flatblocks frontadmin_tags markup %}
+{% load i18n thumbnail markup %}
 
 {% block app.title %}{% firstof object.title|capfirst meta.title|capfirst %}{% if object.title or meta.title %} / {% endif %}{% trans "News" %} / {% endblock %}
 {% block meta.description %}{% firstof object.description meta.desc %}{% endblock %}
