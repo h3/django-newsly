@@ -96,7 +96,7 @@ class NewsMediaBase(models.Model):
 
 
 class NewsPhoto(NewsMediaBase):
-    photo = models.ImageField(_('Photo'), upload_to=get_news_photo_path)
+    photo = models.ImageField(_('Photo'), upload_to=get_news_photo_path, max_length=250)
     class Meta:
         verbose_name = _('Photo')
         verbose_name_plural = _('Photos')
