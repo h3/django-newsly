@@ -1,7 +1,7 @@
 {% extends "newsly/base.html" %}
 {% load i18n frontadmin_tags %}
 
-{% block head.title %}{% if request.meta.title %}{{ request.meta.title }}{% else %}{% trans "News" %} / {% endif %}{% endblock %}
+{% block app.title %}{% if request.meta.title %}{{ request.meta.title }}{% else %}{% trans "News" %} / {% endif %}{% endblock %}
 
 {% block page.id %}newsly-list{% endblock %}
 {% block page.class %}{% endblock %}
