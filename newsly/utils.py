@@ -5,19 +5,21 @@ from django.db.models.fields.files import FileField
 
 from newsly.conf import settings
 
+def ascii_safe(name):
+    return unicodedata.normalize('NFKD', unicode(name.replace(' ', '_'))).encode('ascii', 'ignore')
 
 def get_news_photo_path(instance, filename):
     return settings.PHOTOS_PATH % {
             'slug': instance.news.slug, 
             'username': instance.news.author.username, 
-            'filename': filename}
+            'filename': ascii_sage(filename)}
 
 
 def get_news_document_path(instance, filename):
     return settings.DOCUMENTS_PATH % {
             'slug': instance.news.slug, 
             'username': instance.news.author.username, 
-            'filename': filename}
+            'filename': ascii_safe(filename)}
 
 
 def file_cleanup(sender, **kwargs):
