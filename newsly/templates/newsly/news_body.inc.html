@@ -14,22 +14,3 @@
     {{ object.body|textile }}
     {% endif %}
 </div>
-{% comment %}
-<div class="hero-unit newsly-teaser">
-    <h1>{{ object.title }}</h1>
-    {% if grappelli_tinymce %}
-    {{ object.teaser|safe }}AA
-    {% else %}
-    {{ object.teaser }}BB
-    {% else %}
-    {% endif %}
-</div>
-<div class="news-body">
-    {% if grappelli_tinymce %}
-    {{ object.body|safe }}
-    {% else %}
-    {{ object.body }}
-    {% else %}
-</div>
-{% endcomment %}
-
