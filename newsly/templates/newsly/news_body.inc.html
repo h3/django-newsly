@@ -1,4 +1,5 @@
 {% load i18n markup %}
+{% if object.teaser %}
 <div class="hero-unit newsly-teaser">
     <h1>{{ object.title|capfirst }}</h1>
     {% if grappelli_tinymce %}
@@ -7,6 +8,11 @@
     {{ object.teaser|textile }}
     {% endif %}
 </div>
+{% else %}
+<div class="page-header">
+    <h1>{{ object.title|capfirst }}</h1>
+</div>
+{% endif %}
 <div class="news-body">
     {% if grappelli_tinymce %}
     {{ object.body|safe }}
