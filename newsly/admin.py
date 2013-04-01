@@ -23,6 +23,49 @@ except:
     StackedInlineAdmin = admin.StackedInline
 
 
+ADMIN_FIELDSET = []
+FIELDS = []
+ADMIN_LIST_DISPLAY = ['title', 'author', 'date_added']
+
+if not settings.AUTO_AUTHOR:
+    FIELDS.append('author')
+
+if settings.CATEGORIES:
+    FIELDS.append('category')
+    ADMIN_LIST_DISPLAY.append('category')
+
+if not settings.AUTO_DATE_PUBLISH:
+    FIELDS.append('date_publish')
+    ADMIN_LIST_DISPLAY.append('date_publish')
+
+if settings.DATE_UNPUBLISH:
+    FIELDS.append('date_unpublish')
+    ADMIN_LIST_DISPLAY.append('date_unpublish')
+
+ADMIN_FIELDSET.append((_('Title'), {
+    'fields': ('title', 'slug',)
+}))
+
+if settings.USE_TEASER:
+    ADMIN_FIELDSET.append((_('Teaser'), {
+        'fields': ('teaser',)
+    }))
+
+ADMIN_FIELDSET.append((_('Content'), {
+    'fields': ('body',)
+}))
+
+if len(FIELDS):
+    ADMIN_FIELDSET.append((None, {'fields': FIELDS}))
+
+if settings.SEO:
+    ADMIN_FIELDSET.append((_('SEO'), {
+        'fields': ('meta_keywords', 'meta_description',)
+    }))
+
+
+
+
 class NewsVideoInline(StackedInlineAdmin):
     model = NewsVideo
     extra = 1
@@ -39,35 +82,19 @@ class NewsDocumentInline(StackedInlineAdmin):
 
 
 class NewsAdmin(ModelAdmin):
-    list_display = ('title', 'author', 'date_added', 'date_publish', 'date_unpublish')
     list_filter = ('author',)
-    search_fields = ('title',)
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'date_publish'
     inlines = [NewsPhotoInline, NewsVideoInline, NewsDocumentInline]
 
-    fieldsets = (
-        (None, {
-            'fields': (
-                'author', 
-                'category',
-                'date_publish', 
-                'date_unpublish',
-            )
-        }),
-        (_('Title'), {
-            'fields': ('title', 'slug',)
-        }),
-        (_('Teaser'), {
-            'fields': ('teaser',)
-        }),
-        (_('Content'), {
-            'fields': ('body',)
-        }),
-        (_('SEO'), {
-            'fields': ('meta_keywords', 'meta_description',)
-        }),
-    )
+    list_display = ADMIN_LIST_DISPLAY
+    search_fields = settings.ADMIN_SEARCH_FIELDS
+    fieldsets = ADMIN_FIELDSET
+
+    def save_model(self, request, obj, form, change):
+        if settings.AUTO_AUTHOR:
+            obj.author = request.user
+            obj.save()
 
     class Media:
         # FIXME: This might clash with TranslationAdmin.Media.js ..

@@ -35,7 +35,7 @@ class News(models.Model):
     slug  = models.CharField(_("Slug"), max_length=250, unique=True)
     author = models.ForeignKey(User)
 
-    teaser = models.TextField(_("Text"))
+    teaser = models.TextField(_("Text"), blank=True, null=True)
     body  = models.TextField(_("Text"))
 
     date_added     = models.DateTimeField(auto_now_add=True)
