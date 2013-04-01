@@ -8,10 +8,18 @@
         {% if news.newsphoto_set.all %}
         <a href="{{ news.newsphoto_set.all.0.photo.url }}" class="newsly-photo-thumb pull-left" title="{{ photo.title }}" rel="gallery"><img src="{% thumbnail news.newsphoto_set.all.0.photo 100x100 crop %}" alt="{{ photo.title }}"></a>
         {% endif %}
-        {% if grappelli_tinymce %}
-        {{ news.teaser|safe }}
+        {% if news.teaser %}
+            {% if grappelli_tinymce %}
+                {{ news.teaser|safe }}
+            {% else %}
+                {{ news.teaser|textile }}
+            {% endif %}
         {% else %}
-        {{ news.teaser|textile }}
+            {% if grappelli_tinymce %}
+                {{ news.body|truncatewords_html:40|safe }}
+            {% else %}
+                {{ news.body|textile|truncatewords_html:40 }}
+            {% endif %}
         {% endif %}
     </div>
 </div>
