@@ -12,7 +12,7 @@ def get_news_photo_path(instance, filename):
     return settings.PHOTOS_PATH % {
             'slug': instance.news.slug, 
             'username': instance.news.author.username, 
-            'filename': ascii_sage(filename)}
+            'filename': ascii_safe(filename)}
 
 
 def get_news_document_path(instance, filename):
