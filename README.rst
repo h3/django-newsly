@@ -1,9 +1,9 @@
 Installation
 ============
 
-In `settings.py` add `newsly` to your `INSTALLED_APPS`.
-
-Add `(r'news/', include('newsly.urls')),` to your `urls.py`.
+1. In `settings.py` add `newsly` to your `INSTALLED_APPS`.
+2. Add `(r'news/', include('newsly.urls')),` to your `urls.py`.
+3. If you have south: `migrate newsly`, else syncdb
 
 
 Settings
