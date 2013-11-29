@@ -6,7 +6,7 @@ Installation
 3. If you have south: `migrate newsly`, else syncdb
 
 Settings
-========
+--------
 
 +--------------------------------+-------------------------------------------------------+
 | Setting                        | Default                                               |
@@ -47,6 +47,20 @@ Settings
 +--------------------------------+-------------------------------------------------------+
 | NEWSLY_VIDEOS_SIZE             | '240' (height is calculated from width)               |
 +--------------------------------+-------------------------------------------------------+
+
+Template tags
+=============
+
+```django
+{% load newsly_tags %}
+
+{% get_latest_news limit=10 as latest_news %}
+{{ latest_news }}
+
+
+{% get_latest_news author=1 category=2 limit=10 as latest_news %}
+
+```
 
 
 Credits
