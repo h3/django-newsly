@@ -5,7 +5,6 @@ Installation
 2. Add `(r'news/', include('newsly.urls')),` to your `urls.py`.
 3. If you have south: `migrate newsly`, else syncdb
 
-
 Settings
 ========
 
