@@ -94,7 +94,7 @@ class NewsAdmin(ModelAdmin):
     def save_model(self, request, obj, form, change):
         if settings.AUTO_AUTHOR:
             obj.author = request.user
-            obj.save()
+        obj.save()
 
     class Media:
         # FIXME: This might clash with TranslationAdmin.Media.js ..
