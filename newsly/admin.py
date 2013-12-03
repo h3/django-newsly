@@ -106,4 +106,6 @@ admin.site.register(News, NewsAdmin)
 class NewsCategoryAdmin(ModelAdmin):
     list_display = ('title',)
     prepopulated_fields = {'slug': ('title',)}
-admin.site.register(NewsCategory, NewsCategoryAdmin)
+
+if settings.CATEGORIES:
+    admin.site.register(NewsCategory, NewsCategoryAdmin)
