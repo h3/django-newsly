@@ -23,7 +23,7 @@ def get_latest_news(*args, **kwargs):
 
     if author:   qs = qs.filter(author_id=author)
     if category: qs = qs.filter(category_id=category)
-    
+
     return limit and qs[0:limit] or qs
 
 
@@ -36,7 +36,7 @@ def embed_player(v, w):
     try:
         if "embed" not in v:
             v = v.split('?v=')[1].split('&')[0]
-        return html % {'w': w, 'src': v, 'h': int(int(w) * 0.75) }
+        return html % {'w': str(w), 'src': v, 'h': int(int(w) * 0.75) }
     except:
         return ''
 
@@ -48,7 +48,7 @@ def get_file_extension(f):
 
     >>> get_file_extension("test.pdf")
     pdf
-    
+
     >>> get_file_extension("/tmp/test.pdf")
     pdf
 
