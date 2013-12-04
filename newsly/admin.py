@@ -25,7 +25,8 @@ except:
 
 ADMIN_FIELDSET = []
 FIELDS = []
-ADMIN_LIST_DISPLAY = ['title', 'author', 'date_added']
+ADMIN_LIST_DISPLAY = ['title', 'author']
+ADMIN_LIST_EDITABLE= []
 
 if not settings.AUTO_AUTHOR:
     FIELDS.append('author')
@@ -34,13 +35,15 @@ if settings.CATEGORIES:
     FIELDS.append('category')
     ADMIN_LIST_DISPLAY.append('category')
 
-if not settings.AUTO_DATE_PUBLISH:
+if settings.DATE_PUBLISH:
     FIELDS.append('date_publish')
     ADMIN_LIST_DISPLAY.append('date_publish')
+    ADMIN_LIST_EDITABLE.append('date_publish')
 
 if settings.DATE_UNPUBLISH:
     FIELDS.append('date_unpublish')
     ADMIN_LIST_DISPLAY.append('date_unpublish')
+    ADMIN_LIST_EDITABLE.append('date_unpublish')
 
 ADMIN_FIELDSET.append((_('Title'), {
     'fields': ('title', 'slug',)
@@ -83,6 +86,7 @@ class NewsDocumentInline(StackedInlineAdmin):
 
 class NewsAdmin(ModelAdmin):
     list_filter = ('author',)
+    list_editable = ADMIN_LIST_EDITABLE
     prepopulated_fields = {'slug': ('title',)}
     date_hierarchy = 'date_publish'
     inlines = [NewsPhotoInline, NewsVideoInline, NewsDocumentInline]

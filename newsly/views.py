@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404
+from django.http import Http404
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView, TemplateView, DetailView
 
@@ -17,24 +18,24 @@ class NewsView(ListView):
         m = self.request.GET.get('m', None)
 
         if a:
-            qs = News.objects.filter(author=a)
+            qs = News.published.filter(author=a)
         elif c:
             if c == 'None':
-                qs = News.objects.filter(category__isnull=True)
+                qs = News.published.filter(category__isnull=True)
             else:
-                qs = News.objects.filter(category=c)
+                qs = News.published.filter(category=c)
         elif y and m:
-            qs = News.objects.filter(date_publish__year=y, date_publish__month=m)
+            qs = News.published.filter(date_publish__year=y, date_publish__month=m)
         else:
-            qs = News.objects.filter()
+            qs = News.published.filter()
 
         return qs
-    
+
     def get_context_data(self, **kwargs):
         context = super(NewsView, self).get_context_data(**kwargs)
-        context['date_list']   = News.objects.values('date_publish')
-        context['category_list']   = News.objects.values('category', 'category__title', 'category__pk').order_by('category__title').distinct()
-        context['author_list'] = News.objects.values('author', 'author__username', \
+        context['date_list']   = News.published.values('date_publish')
+        context['category_list']   = News.published.values('category', 'category__title', 'category__pk').order_by('category__title').distinct()
+        context['author_list'] = News.published.values('author', 'author__username', \
                 'author__first_name', 'author__last_name').order_by('author__username').distinct()
         context['grappelli_tinymce'] = newsly_settings.GRPAPPELLI_TINYMCE
         return context
@@ -42,7 +43,13 @@ class NewsView(ListView):
 
 class NewsDetail(DetailView):
     template_name = 'newsly/news_detail.html'
-    model = News    
+    model = News
+
+    def get_object(self):
+        try:
+            return News.published.get(slug=self.kwargs.get('slug'))
+        except News.DoesNotExist:
+            raise Http404
 
     def get_context_data(self, **kwargs):
         context = super(NewsDetail, self).get_context_data(**kwargs)

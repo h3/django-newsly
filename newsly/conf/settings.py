@@ -17,7 +17,7 @@ ADMIN_SEARCH_FIELDS = getattr(settings, 'NEWSLY_ADMIN_SEARCH_FIELDS', ('title',)
 
 USE_TEASER = getattr(settings, 'NEWSLY_USE_TEASER', True)
 AUTO_AUTHOR = getattr(settings, 'NEWSLY_AUTO_AUTHOR', False)
-AUTO_DATE_PUBLISH = getattr(settings, 'NEWSLY_AUTO_DATE_PUBLISH', False)
+DATE_PUBLISH = getattr(settings, 'NEWSLY_DATE_PUBLISH', True)
 DATE_UNPUBLISH = getattr(settings, 'NEWSLY_DATE_UNPUBLISH', True)
 CATEGORIES = getattr(settings, 'NEWSLY_CATEGORIES', False)
 SEO = getattr(settings, 'NEWSLY_SEO', True)

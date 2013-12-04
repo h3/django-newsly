@@ -1,11 +1,13 @@
 import datetime
 
 from django.db import models
+from newsly.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.db.models.signals import post_delete
+from django.db.models import Q
 
 from newsly.utils import file_cleanup, get_news_photo_path, get_news_document_path
 from newsly.conf import settings
@@ -14,8 +16,12 @@ from newsly.conf import settings
 class PublishedNewsManager(models.Manager):
     def get_query_set(self):
         now = datetime.datetime.now()
-        return super(PublishedNewsManager, self).get_query_set()\
-                    .exclude(date_unpublish__lte=now).exclude(date_publish__gte=now)
+        qs = super(PublishedNewsManager, self).get_query_set()
+        if settings.DATE_PUBLISH:
+            qs = qs.exclude(Q(date_publish__gt=now) | Q(date_publish__isnull=True))
+        if settings.DATE_UNPUBLISH:
+            qs = qs.exclude(date_unpublish__lte=now)
+        return qs
 
 
 class NewsCategory(models.Model):
@@ -51,8 +57,8 @@ class News(models.Model):
     published = PublishedNewsManager()
 
     def save(self, *args, **kwargs):
-        if self.date_publish is None:
-            self.date_publish = datetime.datetime.now()
+       #if self.date_publish is None and:
+       #    self.date_publish = datetime.datetime.now()
         super(News, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
@@ -64,13 +70,13 @@ class News(models.Model):
                 return self.author.username
             elif settings.AUTHOR_DISPLAY == 'fullname':
                 a = "%s %s".strip() % (self.author.first_name, self.author.last_name)
-                if a.strip() != '': 
+                if a.strip() != '':
                     return a.strip()
                 else:
                     return self.author.username
         return False
-        
-    
+
+
     def __unicode__(self):
         return u'%s' % self.title
 
@@ -104,7 +110,7 @@ post_delete.connect(file_cleanup, sender=NewsPhoto, dispatch_uid="NewsPhoto.file
 
 
 class NewsVideo(NewsMediaBase):
-    video = models.URLField(_('URL'), max_length=250) 
+    video = models.URLField(_('URL'), max_length=250)
     class Meta:
         verbose_name = _('Video')
         verbose_name_plural = _('Videos')
@@ -112,7 +118,7 @@ class NewsVideo(NewsMediaBase):
 
 class NewsDocument(NewsMediaBase):
     document = models.FileField(_('Document'), upload_to=get_news_document_path)
-    
+
     def __unicode__(self):
         return u'%s' % self.title
 
